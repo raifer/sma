@@ -1,8 +1,17 @@
 import java.awt.Point;
 
+/**
+ * Balls est la class qui permet de gérer des balles
+ **
+ * @author Claire et Mathieu
+ *
+ */
 public class Balls {
     private Point [] balls, ballsOri;
     
+	/**
+	 * Créer 4 balles à des emplacement variés 
+	 */
 	public Balls(){
 	    this.balls = new Point[4];
 	    this.ballsOri = new Point[4];
@@ -18,12 +27,22 @@ public class Balls {
 	    }
 	}
 	
+	/**
+	 * Déplacer toutes les balles
+	 ** 
+	 * @param dx Déplacement sur x
+	 * @param dy Déplacement sur y
+	 */
 	public void translate(int dx, int dy) {
 	    for (Point ball:balls){
 		ball.translate(dx, dy);
 	    }
 	}
 	
+	/**
+	 * Replace toutes les balles à leurs positions d'origine
+	 * 
+	 */
 	public void reInit() {
 	    for(int i=0; i< balls.length; i++){
 		this.balls[i] = this.ballsOri[i].getLocation();
