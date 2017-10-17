@@ -35,6 +35,9 @@ testGUI:
 exeGUI:
 	java -classpath bin:bin/gui.jar TestGUI
 
+javadoc:
+	javadoc -encoding utf8 -docencoding utf8 -charset utf8 -d javadoc src/*java
+
 clean:
 	rm -rf bin/*.class
 
