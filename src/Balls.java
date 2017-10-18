@@ -16,10 +16,10 @@ public class Balls {
 	    this.balls = new Point[4];
 	    this.ballsOri = new Point[4];
 	    
-	    this.balls[0] = new Point(5,8);
-	    this.balls[1] = new Point(21,1);
-	    this.balls[2] = new Point(0,4);
-	    this.balls[3] = new Point(4,8);
+	    this.balls[0] = new Point(100,100);
+	    this.balls[1] = new Point(400,400);
+	    this.balls[2] = new Point(100,400);
+	    this.balls[3] = new Point(400,100);
 	    
 	    for(int i=0; i < balls.length; i++){
 		//this.ballsOri[i] = (Point)this.balls[i].clone();
@@ -44,15 +44,37 @@ public class Balls {
 	 * 
 	 */
 	public void reInit() {
-	    for(int i=0; i< balls.length; i++){
+	    for(int i=0; i< this.getNbBalls(); i++){
 		this.balls[i] = this.ballsOri[i].getLocation();
 	    }
 	}
 	
+	/**
+	 * @return
+	 */
+	public int getNbBalls(){
+	    return balls.length;
+	}
+	
+	/**
+	 * Permet de récupérer la balle à partir de son numéro
+	 *** 
+	 * @param ballNum Le numéro de la balle que l'on veut récupérer
+	 * @return Retourne la balle demandé si il existe
+	 *** 
+	 * @throw IllegalArgumentException Lève une exception si la balle n'existe pas
+	 */
+	public Point getBall(int ballNum){
+	    if (ballNum >= 0 && ballNum < this.getNbBalls()){
+	return balls[ballNum];
+	    } else throw new IllegalArgumentException("Numéro de balle incorecte.");
+	    }
+	
+	
 	@Override
 	public String toString() {
 	    StringBuffer sb = new StringBuffer();
-	        sb.append("Il y a " + balls.length +" balles : \n");
+	        sb.append("Il y a " + this.getNbBalls()+" balles : \n");
 	        for(Point ball:balls){
 	            sb.append(ball.getX() + ", ");
 	            sb.append(ball.getY() + "\n");
