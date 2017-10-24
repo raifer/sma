@@ -36,10 +36,6 @@ public class JeuDeLaVie {
 		}
 	}
 		
-	//A mettre dans le constructeur avec random
-	//Faire une boucle qui copie le tableau : voir balls.Ori
-	//Un tableau t un tableau t+1
-	//Claire : Faire le constructeur 
 	
  
 	

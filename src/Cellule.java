@@ -12,10 +12,9 @@ public class Cellule extends Point {
 		this.etat = e;
 	}
 	
-	
-	
 	// Le constructeur
-	
+	public Cellule(int x, int y, Etat e) {
+	}
 	
 	// Les méthodes
 	
