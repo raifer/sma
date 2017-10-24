@@ -17,14 +17,18 @@ public class JeuDeLaVie {
 	//Constructeur
 	public JeuDeLaVie() {
 		double p;
+		Etat e;
 		for (int i=0; i<NB_LIGNES; i++) {
 			for (int j=0; j<NB_COLONNES; j++){
 				p = Math.random();
 				if (p>0.5) {
-					this.grilleCour[i][j].setEtat(Etat.VIVANT);
+					e = Etat.VIVANT;
 				}
 				else
-					this.grilleCour[i][j].setEtat(Etat.MORT);
+					e = Etat.MORT;
+				this.grilleCour[i][j] = new Cellule(i,j,e);
+				this.grilleOri[i][j] = new Cellule(i,j,e);
+				this.grilleSuiv[i][j] = new Cellule(i,j,Etat.MORT);
 			}
 		}
 		
@@ -35,6 +39,10 @@ public class JeuDeLaVie {
 			}
 		}
 	}
+	
+	// Méthodes
+	
+	
 		
 	
  
@@ -94,4 +102,6 @@ if (y == NB_COLONNES) y = 0;
 	public Cellule getCellule(int x, int y){
 		return this.grilleCour[x][y];
 	}
+	
+	
 }
