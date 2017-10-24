@@ -115,6 +115,24 @@ public class JeuDeLaVie {
 	public Cellule getCellule(int x, int y){
 		return this.grilleCour[x][y];
 	}
+	
+	/**
+	 * Met à jour la grille avec les règles du jeux de la vie.
+	 * 
+	 */
+	public void majJeux(){
+		for (int x=0; x < this.getNbLignes(); x++) {
+			for (int y=0; y < this.getNbColonnes(); y++){
+				majCellule(getCellule(x,y));	
+			}
+		}
+		
+		// Inversion des deux grilles.
+		Cellule[][] grilleSAV = new Cellule[NB_LIGNES][NB_COLONNES];
+		grilleSAV = this.grilleCour;
+		this.grilleCour = this.grilleSuiv;
+		this.grilleSuiv = grilleSAV;
+	}
 
 	/**
 	 *Calcule le future état de la cellule c et le stoque dans la grille suivante.
