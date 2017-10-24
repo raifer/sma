@@ -1,4 +1,4 @@
 
 public enum Etat {
-	VIVANT,MORT
+	MORT,VIVANT
 }
