@@ -12,6 +12,14 @@ public class Cellule extends Point {
 		this.etat = e;
 	}
 	
+	
+	public int getXInt() {
+		return (int)super.getX();
+	}
+	public int getYInt() {
+		return (int)super.getY();
+	}
+	
 	// Le constructeur
 	public Cellule(int x, int y, Etat e) {
 	}
