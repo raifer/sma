@@ -22,6 +22,8 @@ public class Cellule extends Point {
 	
 	// Le constructeur
 	public Cellule(int x, int y, Etat e) {
+		this.setLocation(x, y);
+		this.setEtat(e);		
 	}
 	
 	// Les méthodes
