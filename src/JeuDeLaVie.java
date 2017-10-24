@@ -151,7 +151,7 @@ public class JeuDeLaVie {
 		}
 
 		switch (nbVoisinsVivants){
-		case 4: case 5: case 6: case 7: case 8:
+		case 0: case 1: case 4: case 5: case 6: case 7: case 8:
 			etat = Etat.MORT;
 			break;
 		case 3:
@@ -159,9 +159,6 @@ public class JeuDeLaVie {
 			break;
 		case 2:
 			etat = c.getEtat();
-			break;
-		case 0: case 1:
-			etat = Etat.MORT;
 			break;
 		}
 
