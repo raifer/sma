@@ -61,38 +61,27 @@ Les méthodes next() et restart() ne font que déléguer le traitement à cet attrib
 La figure 3 fournit un programme de test qui ouvre une fenêtre de simulation, sans rien dessiner pour l’instant.
 Par contre vous pouvez utiliser les boutons de l’interface pour modifier l’état des balles.
 Un exemple de trace est fourni, avec trois balles et une translation de (10,10) à chaque appel à next().
-2
-		« interface »
-		Simulable
-GUISimulator		
-		
-		
-	1	+ next() + restart()
-1
-BallsSimulator
-+ next() + restart()
-Balls
-+ translate(dx : int, dy : int) + reInit()
-Point
-n
-FIGURE 1 - Diagramme des classes permettant de contrôler le simulateur Balls à l’aide de l’interface graphique fournie.
+
 La classe BallsSimulator doit réaliser l’interface Simulable, et donc (re)définir les deux méthodes next() et restart().
-1	public class BallsSimulator implements	Simulable {			
-2	//	...			
-3	®Override			
-4				
-5		public void	next()	{	
-6		//	...		
-7		}		
+
+public class BallsSimulator implements	Simulable {			
+//	...			
+@Override			
+			
+		public void	next()	{	
+		//	...		
+		}		
 8				
-9		®Override		
-10		public void	restart ()	{
-11		//	...		
-12		}		
-13	}			
+		®Override		
+		public void	restart ()	{
+		//	...		
+		}		
+	}			
 FIGURE 2 - La réalisation de l’interface Simulable est faite grâce au mot-clé implements.
+
 La classe s’engage donc à définir toutes les méthodes déclarées dans l’interface, ici next() et restart().
 Par héritage une instance de BallsSimulator EST un objet Simulable, et peut donc être utilisée comme telle par le GUISimulator.
+
 1 import gui.GUISimulator;
 2 import java.awt.Color;
 3
@@ -104,7 +93,6 @@ Par héritage une instance de BallsSimulator EST un objet Simulable, et peut donc
 9 }
 )[java.awt.Point[x=10,y=110], java.awt.Point[x=110,y=110], java.awt.Point[x=210,y=110]] [java.awt.Point[x=20,y=120], java.awt.Point[x=120,y=120], java.awt.Point[x=220,y=120]] [java.awt.Point[x=30,y=130], java.awt.Point[x=130,y=130], java.awt.Point[x=230,y=130]] [java.awt.Point[x=40,y=140], java.awt.Point[x=140,y=140], java.awt.Point[x=240,y=140]] [java.awt.Point[x=0,y=100], java.awt.Point[x=100,y=100], java.awt.Point[x=200,y=100]] [java.awt.Point[x=10,y=110], java.awt.Point[x=110,y=110], java.awt.Point[x=210,y=110]]
 FIGURE 3 - Programme de test et trace d’exécution de la simulation des balles, après 4 clics sur Suivant, puis Début, puis Lecture.
-3
 
 ## 2.3 C’est plus joli en affichant
 La dernière étape consiste à afficher les balles dans la fenêtre graphique.
@@ -113,6 +101,7 @@ Cette méthode prend en paramètre une instance d’une sous-classe de GraphicalElem
 Il est aussi possible de rajouter un type d'affichage en écrivant une nouvelle classe fille de GraphicalElement.
 Pour effacer toutes les formes de la fenêtre, on utilise la méthode reset().
 Le code de la figure 4 est un exemple d’utilisation basique de l’interface graphique, pour afficher quatre carrés bleus sur fond noir.
+
 1 import java.awt.Color;
 2 import gui.GUISimulator;
 3 import gui.Rectangle;
@@ -130,12 +119,15 @@ Le code de la figure 4 est un exemple d’utilisation basique de l’interface graph
 15 }
 FIGURE 4 – Un exemple de code illustrant le fonctionnement de l’interface graphique, qui dessine 4 carrés bleus sur fond noir.
 
-### Question 3 Reprenez votre simulateur pour afficher les balles dans la fenêtre graphique, par exemple comme des cercles.
+### Question 3 
+Reprenez votre simulateur pour afficher les balles dans la fenêtre graphique, par exemple comme des cercles.
 A chaque appel de next(), les cercles doivent être réaffichés selon leur nouvelle position.
 ^ Dans quelle classe sont invoquées les méthodes de dessin ? Réfléchissez en particulier au lien(s) nécessaire(s) entre les classes BallsSimulator et GUISimulator.
-Question 4 Si vous êtes joueur, animez les balles pour qu’elles rebondissent sur les bords de la fenêtre pour toujours rester visibles.
+
+### Question 4 Si vous êtes joueur, animez les balles pour qu’elles rebondissent sur les bords de la fenêtre pour toujours rester visibles.
 Et voilà, vous avez terminé votre premier simulateur!
-3 Des automates cellulaires
+
+# 3 Des automates cellulaires
 Tous les éléments sont désormais en place pour construire des simulations graphiques de systèmes multiagents.
 Il ne manque plus qu’à coder les modèles des systèmes, puis les lier à un simulateur (et à l’interface graphique qui va avec).
 Les premiers systèmes étudiés sont des types de systèmes multiagents particuliers : les automates cellulaires.
@@ -144,8 +136,7 @@ Un automate cellulaire consiste en une grille régulière de « cellules » contenan
 L’état d’une cellule au temps t + 1 est fonction de l’état au temps t d’un nombre fini de cellules appelé son « voisinage ».
 À chaque nouvelle unité de temps, les mêmes règles sont appliquées simultanément à toutes les cellules de la grille, produisant une nouvelle « génération » de cellules dépendant entièrement de la génération précédente.
 Les trois systèmes multiagents auxquels nous allons nous intéresser dans cette partie sont des exemples d’automates cellulaires.
-4
-3.1 Le jeu de la vie de Conway
+## 3.1 Le jeu de la vie de Conway
 Vous avez probablement entendu parler du jeu de la vie de Conway.
 Il s’agit d’un automate cellulaire dont les règles sont extrêmement simples.
 — Chaque cellule de la grille peut prendre deux états : vivant ou mort.
@@ -153,14 +144,15 @@ Il s’agit d’un automate cellulaire dont les règles sont extrêmement simples.
 — Une cellule vivante possédant deux ou trois voisines (sur huit) vivantes le reste, sinon elle meurt.
 Un exemple est donné figure 5.
 ~	~
-FIGURE 5 – Un exemple d’évolution sur trois étapes d’un extrait de grille dans le jeu de la vie.
 Les cellules mortes sont en blanc, les cellules vivantes en bleu.
 En ce qui concerne les cellules situées sur les bords de la grille, on suppose pour simplifier que la grille est circulaire.
 Ainsi, par exemple, si la grille est de taille n x m, la cellule (k, m) aura pour voisins les cellules (k ^ 1, m ^ 1), (k, m ^ 1), (k + 1, m ^ 1), (k ^ 1, m), (k + 1, m ^ 1), (k ^ 1, 1), (k, 1) et (k + 1,1) (si k < n).
-Question 5 Développez un simulateur graphique du jeu de la vie de Conway, en vous appuyant sur les éléments déjà développés aux parties précédentes.
+
+### Question 5 Développez un simulateur graphique du jeu de la vie de Conway, en vous appuyant sur les éléments déjà développés aux parties précédentes.
 ^ Attention, l’état des cellules à l’étape t + 1 dépend de l’état des cellules à l’étape t.
 Faites attention si vous modifiez « à la volée » l’état des cellules, car lorsque vous calculez l’état suivant d’une cellule donnée, il est possible que ses voisines aient déjà été modifiées, ce qui conduit à un résultat incorrect.
-3.2 Le jeu de l’immigration
+
+## 3.2 Le jeu de l’immigration
 Le deuxième automate cellulaire considéré est une légère variante du jeu de la vie, appelée « jeu de l’immigration » (pour une raison que j’ignore).
 Le principe est simple :
 — chaque cellule peut être dans n états (au lieu de deux pour le jeu de la vie) ;
