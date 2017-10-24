@@ -1,5 +1,6 @@
 import java.awt.Point;
 
+@SuppressWarnings("serial")
 public class Cellule extends Point {
 
 	private Etat etat;
@@ -11,7 +12,6 @@ public class Cellule extends Point {
 	public void setEtat(Etat e){
 		this.etat = e;
 	}
-	
 	
 	public int getXInt() {
 		return (int)super.getX();
