@@ -7,6 +7,13 @@ public class JeuDeLaVie {
 	private Cellule[][] grilleSuiv = new Cellule[NB_LIGNES][NB_COLONNES];
 	private Cellule[][] grilleOri = new Cellule[NB_LIGNES][NB_COLONNES];
 	
+	public int getNbLignes() {
+		return JeuDeLaVie.NB_LIGNES;
+	}
+	public int getNbColonnes() {
+		return JeuDeLaVie.NB_COLONNES;
+	}
+	
 	//Constructeur
 	public JeuDeLaVie() {
 		double p;
