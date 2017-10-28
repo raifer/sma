@@ -1,3 +1,4 @@
+package automate;
 
 import gui.GUISimulator;
 import gui.Simulable;
@@ -56,7 +57,7 @@ public class CelluleSimulator implements Simulable {
      */
     @Override
     public void next() {
-        notreJeu.majJeux();
+        notreJeu.majAutomate();
         this.drawJDLV();
     }
 

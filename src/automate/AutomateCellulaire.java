@@ -1,51 +1,57 @@
+/**
+ * 
+ */
+package automate;
 
-public class JeuDeLaVie {
-	private static final int NB_LIGNES = 10;
-	private static final int NB_COLONNES = 10;
+/**
+ * @author Mathieu
+ *
+ */
 
-	// Grille des cellules l'instant t
-	private Cellule[][] grilleCour = new Cellule[NB_LIGNES][NB_COLONNES];
+public abstract class AutomateCellulaire {
+	
+	private int NB_LIGNES = 10;
+	private int NB_COLONNES = 10;
+
+	// Grille des cellules à l'instant t
+	protected Cellule[][] grilleCour = new Cellule[NB_LIGNES][NB_COLONNES];
 	// Grille de cellules à l'instant t+1
-	private Cellule[][] grilleSuiv = new Cellule[NB_LIGNES][NB_COLONNES];
+	protected Cellule[][] grilleSuiv = new Cellule[NB_LIGNES][NB_COLONNES];
 	// Grille de cellules pour sauvegarder les états d'origines.
 	private Cellule[][] grilleOri = new Cellule[NB_LIGNES][NB_COLONNES];
 
+	public AutomateCellulaire() {
+		// Génération de la grille
+		Enum<?> etat;
+		for (int i=0; i<NB_LIGNES; i++) {
+			for (int j=0; j<NB_COLONNES; j++){
+				etat = this.randomEtat();
+				this.grilleCour[i][j] = new Cellule(i,j,etat);
+				this.grilleOri[i][j] = new Cellule(i,j,etat);
+				this.grilleSuiv[i][j] = new Cellule(i,j);
+			}
+		}
+	}		
+
+	abstract Enum<?> randomEtat ();
+
 	/**
-	 * Retourne le nombre de ligne du jeux de la vie
+	 * Retourne le nombre de ligne de l'automate cellulaire.
 	 * 
-	 * @return Retourne le nombre de ligne de la grille du jeuw de la vie.
+	 * @return Retourne le nombre de ligne de la grille du l'automate.
 	 */
 	public int getNbLignes() {
-		return JeuDeLaVie.NB_LIGNES;
+		return this.NB_LIGNES;
 	}
 	
 	/**
-	 * Retourne le nombre de colonnes du jeux de la vie
+	 * Retourne le nombre de colonnes du jeux de l'automate cellulaire.
 	 * 
 	 * @return Nombre de ligne
 	 */
 	public int getNbColonnes() {
-		return JeuDeLaVie.NB_COLONNES;
+		return this.NB_COLONNES;
 	}
-
-	//Constructeur
-	public JeuDeLaVie() {
-		double p;
-		Etat e;
-		for (int i=0; i<NB_LIGNES; i++) {
-			for (int j=0; j<NB_COLONNES; j++){
-				p = Math.random();
-				if (p>0.5) {
-					e = Etat.VIVANT;
-				}
-				else
-					e = Etat.MORT;
-				this.grilleCour[i][j] = new Cellule(i,j,e);
-				this.grilleOri[i][j] = new Cellule(i,j,e);
-				this.grilleSuiv[i][j] = new Cellule(i,j,Etat.MORT);
-			}
-		}
-	}		
 
 	// Méthodes
 
@@ -57,7 +63,7 @@ public class JeuDeLaVie {
 	 * 
 	 * @return Retourne la cellule voisine à la position i.
 	 */
-	private Cellule getVoisin(Cellule c, int position){
+	protected Cellule getVoisin(Cellule c, int position){
 
 		int x=0, y=0;
 		switch (position) {
@@ -120,13 +126,12 @@ public class JeuDeLaVie {
 	 * Met à jour la grille avec les règles du jeux de la vie.
 	 * 
 	 */
-	public void majJeux(){
+	public void majAutomate(){
 		for (int x=0; x < this.getNbLignes(); x++) {
 			for (int y=0; y < this.getNbColonnes(); y++){
 				majCellule(getCellule(x,y));	
 			}
 		}
-		
 		// Inversion des deux grilles.
 		Cellule[][] grilleSAV = new Cellule[NB_LIGNES][NB_COLONNES];
 		grilleSAV = this.grilleCour;
@@ -139,29 +144,6 @@ public class JeuDeLaVie {
 	 *
 	 * @param c La cellule à mettre à jour.
 	 */
-	private void majCellule(Cellule c){
-		int x = c.getXInt();
-		int y = c.getYInt();
-		int nbVoisinsVivants = 0;
-		Etat etat = Etat.MORT;
-
-		// On compte le nombre de voisin vivant
-		for(int i=1; i<9; i++){
-			if (getVoisin(c, i).estVivante()) nbVoisinsVivants++;
-		}
-
-		switch (nbVoisinsVivants){
-		case 0: case 1: case 4: case 5: case 6: case 7: case 8:
-			etat = Etat.MORT;
-			break;
-		case 3:
-			etat = Etat.VIVANT;
-			break;
-		case 2:
-			etat = c.getEtat();
-			break;
-		}
-
-		this.grilleSuiv[x][y].setEtat(etat);
-	}
+	abstract void majCellule(Cellule c);
+	
 }

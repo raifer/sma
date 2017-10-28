@@ -1,3 +1,4 @@
+package balls;
 import java.awt.Point;
 import gui.GUISimulator;
 import gui.Simulable;
