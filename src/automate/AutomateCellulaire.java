@@ -157,4 +157,16 @@ public abstract class AutomateCellulaire {
 	 */
 	abstract void majCellule(Cellule c);
 	
+	public void reInit() {
+		Enum<?> etat;
+		for (int i=0; i<NB_LIGNES; i++) {
+			for (int j=0; j<NB_COLONNES; j++){
+				etat = this.randomEtat();
+				this.grilleCour[i][j].setEtat(etat);
+				this.grilleOri[i][j].setEtat(etat);
+				this.grilleSuiv[i][j].setEtat(etat);;
+			}
+		}
+		
+	}
 }
