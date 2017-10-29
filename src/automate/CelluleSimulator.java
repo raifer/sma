@@ -67,7 +67,7 @@ public class CelluleSimulator implements Simulable {
     	 */
     @Override
     public void restart() {
-        //notreJeu.reInit();
+        notreJeu.reInit();
         this.drawJDLV();
     }
 }
