@@ -160,6 +160,7 @@ Le principe est simple :
 La figure 6 montre un exemple d’évolution d’un extrait de grille du jeu de l’immigration, utilisant le cycle à quatre états apparaissant sur la figure 7.
 ~	~
 Les couleurs associées aux états apparaissent dans la figure 7.
+
 ### Question 6 Développez un simulateur graphique du jeu de l’immigration, en vous appuyant sur les éléments déjà développés aux parties précédentes.
 Vous allez sans doute remarquer qu’une grande partie du code est commun entre ce jeu de l’immigration et le jeu de la vie.
 Avez-vous un moyen d’exploiter correctement ces éléments communs et de ne pas récrire tout le code ?
@@ -176,25 +177,26 @@ L’habitation qu’elle occupait jusqu’ici devient alors vacante.
 Faites varier le nombre de couleurs et le seuil K, et observez le résultat au bout de quelques itérations.
 À partir de quel seuil obtenez-vous une ségrégation ?
 * N’oubliez pas, lors de l'initialisation de vos cellules, de prévoir suffisamment de logements vacants.
-Assurez-vous en outre que deux familles ne puissent pas emménager dans le même logement à la même étape.
+* Assurez-vous en outre que deux familles ne puissent pas emménager dans le même logement à la même étape.
 * Pour stocker l’ensemble des logements vacants, il est fortement conseillé d’utiliser une collection Java.
 Ces classes fournissent des implémentations efficaces de nombreuses structures de données : List, HashSet, Priorityqueue, etc.
 Un document de présentation des principales collections Java et de leur utilisation est disponible sur la page Chamilo du cours.
 * Encore une fois, une partie du code précédent est probablement réutilisable.
 À vous d’exploiter correctement cette caractéristique.
 
-# 4 Un modèle d’essaims : les boids
+# 4 Modèle d’essaims : les boids
 Un autre système va maintenant être étudié pour simuler le déplacement d’agents en essaims.
 Ce modèle a été proposé par Craig Reynolds pour l’animation graphique de groupes d’animaux auto-organisés, tels des essaims d’oiseaux ou de poissons (Reynolds (1987)).
-Ces agents sont appelés des boids2.
-Contrairement aux automates cellulaires, les boids ne sont pas répartis sur une grille régulière mais se déplacent librement dans l’espace, 2D dans notre cas.
-Le comportement d’un agent dépend de la position
-2.
+Ces agents sont appelés des boids
 abrégé de bird-oid objects, en référence aux agents se comportant comme des oiseaux.
-6
-et de l’orientation des agents l’environnant, c’est-à-dire qui sont suffisamment près de lui et dans son champ de vision.
+
+Contrairement aux automates cellulaires, les boids ne sont pas répartis sur une grille régulière mais se déplacent librement dans l’espace, 2D dans notre cas.
+Le comportement d’un agent dépend de la position et de l’orientation des agents l’environnant, c’est-à-dire qui sont suffisamment près de lui et dans son champ de vision.
 Le modèle de base repose sur l’application de trois règles :
-Cohésion un agent se dirige vers la position moyenne (centre de masse) des ses voisins ; Alignement un agent tend à se déplacer dans la même direction que ses voisins ; Séparation les agents trop proches se repoussent, pour éviter les collisions.
+1. Cohésion un agent se dirige vers la position moyenne (centre de masse) des ses voisins ; 
+2. Alignement un agent tend à se déplacer dans la même direction que ses voisins ; 
+3. Séparation les agents trop proches se repoussent, pour éviter les collisions.
+
 Ces trois règles sont suffisantes pour observer la formation spontanée de groupes, à partir d’agents initialement répartis de manière aléatoire.
 D’autres règles peuvent ensuite être ajoutées : points d’attraction ou de répulsion, suivi de trajectoires, contournement d’obstacles, vents et courants, etc.
 La notion de voisinage dépend de la distance et éventuellement de l’orientation.
@@ -208,7 +210,8 @@ Figures issues de la page de Craig Reynolds http://www.red3d.com/cwr/boids/
 La programmation d’un système de boids est simple.
 Elle peut être vue comme la résolution d’un système dynamique basé sur les lois de Newton, avec des hypothèses très simplificatrices (schéma explicite, pas de temps égal à 1, masses des boids égales à 1, etc.).
 En résumé :
-— A chaque pas de temps n, un agent est caractérisé par deux vecteurs : sa position xn et sa vitesse x0n (qui définit de fait son orientation).
+— A chaque pas de temps n, un agent est caractérisé par deux vecteurs : 
+sa position xn et sa vitesse x0n (qui définit de fait son orientation).
 — Chacune des règles régissant l’essaim génère une « force » fi sur chaque agent.
 Le calcul peut dépendre des propriétés de l’agent xn et x0n et de celles des agents dans son voisinage V xn et V x0 n.
 Au final, la force f = E fi est appliquée sur l’agent pour le diriger.
@@ -233,7 +236,6 @@ Vous pouvez utiliser directement les règles de comportement d’un essaim décrites
 Soyez inventifs!
 3.
 plus que du pseudo-code, vous y trouverez presque une classe Boid de base! Mais rassurez-vous, il reste du travail...
-7
 
 ### Question 8 Implantez un simulateur de boids, en utilisant le cadre de simulation précédent.
 ^ Commencez avec des règles simples.
