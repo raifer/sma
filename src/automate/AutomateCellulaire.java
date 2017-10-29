@@ -123,6 +123,17 @@ public abstract class AutomateCellulaire {
 	}
 	
 	/**
+	 * Modifie l'état future d'une cellule de coordonnées x, y.
+	 * 
+	 * @param x Position x de la cellule à modifier
+	 * @param y Position y de la cellule à modifier
+	 * @param etat Nouvelle etat de la cellule à modifier
+	 */
+	protected void setEtatSuiv(int x, int y, Enum<?> etat) {
+		grilleSuiv[x][y].setEtat(etat);
+	}
+	
+	/**
 	 * Met à jour la grille avec les règles du jeux de la vie.
 	 * 
 	 */

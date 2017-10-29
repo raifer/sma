@@ -41,6 +41,6 @@ public class JeuDeLaVie extends AutomateCellulaire{
 			break;
 		}
 
-		this.grilleSuiv[x][y].setEtat(etat);
+		this.setEtatSuiv(x, y, etat);
 	}
 }
