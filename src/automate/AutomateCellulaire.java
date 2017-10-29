@@ -9,7 +9,7 @@ package automate;
  */
 
 public abstract class AutomateCellulaire {
-	
+
 	private int NB_LIGNES = 10;
 	private int NB_COLONNES = 10;
 
@@ -43,7 +43,7 @@ public abstract class AutomateCellulaire {
 	public int getNbLignes() {
 		return this.NB_LIGNES;
 	}
-	
+
 	/**
 	 * Retourne le nombre de colonnes du jeux de l'automate cellulaire.
 	 * 
@@ -121,7 +121,7 @@ public abstract class AutomateCellulaire {
 	public Cellule getCellule(int x, int y){
 		return this.grilleCour[x][y];
 	}
-	
+
 	/**
 	 * Modifie l'état future d'une cellule de coordonnées x, y.
 	 * 
@@ -132,7 +132,19 @@ public abstract class AutomateCellulaire {
 	protected void setEtatSuiv(int x, int y, Enum<?> etat) {
 		grilleSuiv[x][y].setEtat(etat);
 	}
-	
+
+	/**
+	 * Modifie l'état courant d'une cellule de coordonnées x, y.
+	 * 
+	 * @param x Position x de la cellule à modifier
+	 * @param y Position y de la cellule à modifier
+	 * @param etat Nouvelle etat de la cellule à modifier
+	 */
+	protected void setEtatCourant(int x, int y, Enum<?> etat) {
+		grilleCour[x][y].setEtat(etat);
+	}
+
+
 	/**
 	 * Met à jour la grille avec les règles du jeux de la vie.
 	 * 
@@ -156,7 +168,7 @@ public abstract class AutomateCellulaire {
 	 * @param c La cellule à mettre à jour.
 	 */
 	abstract void majCellule(Cellule c);
-	
+
 	/**
 	 * Réinitialise l'automate. Chaque cellule est fixée aléatoirement.
 	 */
@@ -170,6 +182,6 @@ public abstract class AutomateCellulaire {
 				this.grilleSuiv[i][j].setEtat(etat);;
 			}
 		}
-		
+
 	}
 }
