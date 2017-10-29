@@ -157,6 +157,9 @@ public abstract class AutomateCellulaire {
 	 */
 	abstract void majCellule(Cellule c);
 	
+	/**
+	 * Réinitialise l'automate. Chaque cellule est fixée aléatoirement.
+	 */
 	public void reInit() {
 		Enum<?> etat;
 		for (int i=0; i<NB_LIGNES; i++) {
