@@ -11,7 +11,7 @@ public class TestJDLVSimulator {
 		// TODO Auto-generated method stub
 		GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
 		JeuDeLaVie monAuto = new JeuDeLaVie();
-        gui.setSimulable(new CelluleSimulator<JeuDeLaVie>(monAuto,  gui));
+        gui.setSimulable(new AutomateSimulator<JeuDeLaVie>(monAuto,  gui));
 	}
 
 }

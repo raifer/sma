@@ -10,13 +10,13 @@ import java.awt.Color;
  *
  */
 
-public class CelluleSimulator<Automate extends AutomateCellulaire> implements Simulable {
+public class AutomateSimulator<Automate extends AutomateCellulaire> implements Simulable {
 
     protected  Automate notreAutomate;
     protected GUISimulator gui;
     
 
-    public CelluleSimulator(Automate automate, GUISimulator gui){
+    public AutomateSimulator(Automate automate, GUISimulator gui){
         this.notreAutomate = automate;
         this.gui = gui;
         this.drawAutomate();
@@ -31,22 +31,12 @@ public class CelluleSimulator<Automate extends AutomateCellulaire> implements Si
         	//on parcourt les Colonnes de la grille
         	for (int j=0; j< this.notreAutomate.getNbLignes(); j++){
         		//on parcourt les Lignes de la grille
-        		
-        		Cellule C = this.notreAutomate.getCellule(i,j);
-	            if (C.estVivante()){	
-	            	//Si la cellule est vivante, elle sera affichée en bleu
-		            gui.addGraphicalElement(
-		                    new Rectangle((C.getXInt())*20,(C.getYInt())*20,
-		                            Color.decode("#000000"), Color.decode("#1f77b4"), 
+        		Cellule c = this.notreAutomate.getCellule(i,j);
+        		gui.addGraphicalElement(
+        				new Rectangle((c.getXInt())*20,(c.getYInt())*20,
+        						Color.black,
+        						c.getCouleur(),
 		                            20, 20));
-	            }
-	            else{
-	            	//Si la cellule est morte, elle sera affichée en blanc
-		            gui.addGraphicalElement(
-		                    new Rectangle((C.getXInt())*20,(C.getYInt())*20,
-		                            Color.decode("#000000"), Color.decode("#ffffff"), 
-		                            20, 20));
-	            }
         	}
         }
     }
