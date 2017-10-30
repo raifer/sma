@@ -16,6 +16,6 @@ public class SchellingSimulator extends AutomateSimulator<Schelling> {
 	 * @param gui L'interface qui sera utilisée pour la simulation
 	 */
 	public SchellingSimulator(GUISimulator gui) {
-		super( new Schelling(), gui);
+		super( new Schelling(3,4), gui);
 	}
 }

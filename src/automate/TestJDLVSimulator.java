@@ -1,4 +1,8 @@
 package automate;
+/**
+ * @author picardv
+ * 
+ */
 
 import java.awt.Color;
 

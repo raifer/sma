@@ -33,10 +33,9 @@ public class AutomateSimulator<Automate extends AutomateCellulaire> implements S
         		//on parcourt les Lignes de la grille
         		Cellule c = this.notreAutomate.getCellule(i,j);
         		gui.addGraphicalElement(
-        				new Rectangle((c.getXInt())*20,(c.getYInt())*20,
-        						Color.black,
-        						c.getCouleur(),
-		                            20, 20));
+	                    new Rectangle(((c.getXInt())*50)+25,((c.getYInt())*50)+25, 
+	                            Color.black, c.getCouleur(), 
+	                            50, 50));
         	}
         }
     }
