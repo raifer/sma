@@ -2,14 +2,14 @@ package automate;
 
 public class JeuDeLaVie extends AutomateCellulaire{
 	
-	EtatJ randomEtat () {
+	int randomEtat () {
 		double p;
 		p = Math.random();
 		if (p>0.5) {
-			return EtatJ.Vivant;
+			return 1;
 		}
 		else
-			return EtatJ.Mort;
+			return 0;
 	}
 
 
@@ -22,7 +22,7 @@ public class JeuDeLaVie extends AutomateCellulaire{
 		int x = c.getXInt();
 		int y = c.getYInt();
 		int nbVoisinsVivants = 0;
-		 EtatJ etat = EtatJ.Mort;
+		 int etat = 0;
 
 		// On compte le nombre de voisin vivant
 		for(int i=1; i<9; i++){
@@ -31,13 +31,13 @@ public class JeuDeLaVie extends AutomateCellulaire{
 
 		switch (nbVoisinsVivants){
 		case 0: case 1: case 4: case 5: case 6: case 7: case 8:
-			etat = EtatJ.Mort;
+			etat = 0;
 			break;
 		case 3:
-			etat = EtatJ.Vivant;
+			etat = 1;
 			break;
 		case 2:
-			etat = (EtatJ)c.getEtat();
+			etat = c.getEtat();
 			break;
 		}
 

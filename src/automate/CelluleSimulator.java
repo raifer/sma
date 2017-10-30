@@ -5,34 +5,34 @@ import gui.Simulable;
 import gui.Rectangle;
 import java.awt.Color;
 
-public class CelluleSimulator implements Simulable {
+/**
+ * @author Picardv Mathieu
+ *
+ */
 
-    private JeuDeLaVie notreJeu;
-    private GUISimulator gui;
-    /**
-     * Création des Cellules et placement de celles-ci dans la GUI
-     *** 
-     * @param gui L'interface où va se dérouller la simulation
-     * @author picardv
-     */
-    public CelluleSimulator(GUISimulator gui){
+public class CelluleSimulator<Automate extends AutomateCellulaire> implements Simulable {
+
+    protected  Automate notreAutomate;
+    protected GUISimulator gui;
+    
+
+    public CelluleSimulator(Automate automate, GUISimulator gui){
+        this.notreAutomate = automate;
         this.gui = gui;
-        this.notreJeu = new JeuDeLaVie();
-        this.drawJDLV();
+        this.drawAutomate();
     }
     
     /**
      * Dessine les cellules dans notre afficheur graphique
      */
-
-    protected void drawJDLV(){
+    protected void drawAutomate(){
         gui.reset();
-        for (int i=0; i< this.notreJeu.getNbColonnes(); i++){
+        for (int i=0; i< this.notreAutomate.getNbColonnes(); i++){
         	//on parcourt les Colonnes de la grille
-        	for (int j=0; j< this.notreJeu.getNbLignes(); j++){
+        	for (int j=0; j< this.notreAutomate.getNbLignes(); j++){
         		//on parcourt les Lignes de la grille
         		
-        		Cellule C = this.notreJeu.getCellule(i,j);
+        		Cellule C = this.notreAutomate.getCellule(i,j);
 	            if (C.estVivante()){	
 	            	//Si la cellule est vivante, elle sera affichée en bleu
 		            gui.addGraphicalElement(
@@ -57,8 +57,8 @@ public class CelluleSimulator implements Simulable {
      */
     @Override
     public void next() {
-        notreJeu.majAutomate();
-        this.drawJDLV();
+        this.notreAutomate.majAutomate();
+        this.drawAutomate();
     }
 
     	/**
@@ -67,8 +67,8 @@ public class CelluleSimulator implements Simulable {
     	 */
     @Override
     public void restart() {
-        notreJeu.reInit();
-        this.drawJDLV();
+        this.notreAutomate.reInit();
+        this.drawAutomate();
     }
 }
 

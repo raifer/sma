@@ -13,19 +13,18 @@ public abstract class AutomateCellulaire {
 	private int NB_LIGNES = 10;
 	private int NB_COLONNES = 10;
 
-	// Grille des cellules à l'instant t
-	protected Cellule[][] grilleCour = new Cellule[NB_LIGNES][NB_COLONNES];
-	// Grille de cellules à l'instant t+1
-	protected Cellule[][] grilleSuiv = new Cellule[NB_LIGNES][NB_COLONNES];
-	// Grille de cellules pour sauvegarder les états d'origines.
+	/** Grille des cellules à l'instant t */
+	private Cellule[][] grilleCour = new Cellule[NB_LIGNES][NB_COLONNES];
+	/** Grille de cellules à l'instant t+1 */
+	private Cellule[][] grilleSuiv = new Cellule[NB_LIGNES][NB_COLONNES];
+	/** Grille de cellules pour sauvegarder les états d'origines. */
 	private Cellule[][] grilleOri = new Cellule[NB_LIGNES][NB_COLONNES];
 
 	public AutomateCellulaire() {
 		// Génération de la grille
-		Enum<?> etat;
 		for (int i=0; i<NB_LIGNES; i++) {
 			for (int j=0; j<NB_COLONNES; j++){
-				etat = this.randomEtat();
+				int etat = this.randomEtat();
 				this.grilleCour[i][j] = new Cellule(i,j,etat);
 				this.grilleOri[i][j] = new Cellule(i,j,etat);
 				this.grilleSuiv[i][j] = new Cellule(i,j);
@@ -33,7 +32,7 @@ public abstract class AutomateCellulaire {
 		}
 	}		
 
-	abstract Enum<?> randomEtat ();
+	abstract int randomEtat ();
 
 	/**
 	 * Retourne le nombre de ligne de l'automate cellulaire.
@@ -129,7 +128,7 @@ public abstract class AutomateCellulaire {
 	 * @param y Position y de la cellule à modifier
 	 * @param etat Nouvelle etat de la cellule à modifier
 	 */
-	protected void setEtatSuiv(int x, int y, Enum<?> etat) {
+	protected void setEtatSuiv(int x, int y, int etat) {
 		grilleSuiv[x][y].setEtat(etat);
 	}
 
@@ -140,7 +139,7 @@ public abstract class AutomateCellulaire {
 	 * @param y Position y de la cellule à modifier
 	 * @param etat Nouvelle etat de la cellule à modifier
 	 */
-	protected void setEtatCourant(int x, int y, Enum<?> etat) {
+	protected void setEtatCourant(int x, int y, int etat) {
 		grilleCour[x][y].setEtat(etat);
 	}
 
@@ -173,7 +172,7 @@ public abstract class AutomateCellulaire {
 	 * Réinitialise l'automate. Chaque cellule est fixée aléatoirement.
 	 */
 	public void reInit() {
-		Enum<?> etat;
+		int etat;
 		for (int i=0; i<NB_LIGNES; i++) {
 			for (int j=0; j<NB_COLONNES; j++){
 				etat = this.randomEtat();

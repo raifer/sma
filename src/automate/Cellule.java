@@ -5,24 +5,23 @@ import java.awt.Point;
 @SuppressWarnings("serial")
 public class Cellule extends Point {
 
-	private Enum<?> etat;
+	private int etat;
 
 	public Cellule(int x, int y) {
 		this.setLocation(x, y);
 	}
 		
-	public Cellule(int x, int y, Enum<?> etat) {
-		//Cellule(x, y);
-		this.setLocation(x, y);
+	public Cellule(int x, int y, int etat) {
+		this(x, y);
 		this.setEtat(etat);		
 	}
 	
 	// Les get set
-	public Enum<?> getEtat() {
+	public int getEtat() {
 		return this.etat;
 	}
 	
-	public void setEtat(Enum<?> etat){
+	public void setEtat(int etat) {
 		this.etat = etat;
 	}
 	
@@ -37,7 +36,7 @@ public class Cellule extends Point {
 	// Les méthodes
 	
 	public boolean estVivante() {
-		if (this.getEtat().ordinal() > 0){
+		if (this.etat > 0){
 			return true;
 		}
 		else

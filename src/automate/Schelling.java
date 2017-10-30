@@ -92,9 +92,8 @@ private void setNbCellulesVacantes(int nbCellulesVacantes) {
 	 * @see automate.AutomateCellulaire#randomEtat()
 	 */
 	@Override
-	EtatS randomEtat() {
-		int index = this.randomGenerator.nextInt(this.nbCouleurs-1)+1; // On ne veut pas 0 (vacante)
-		return EtatS.valueOf(index);
+	int randomEtat() {
+		return this.randomGenerator.nextInt(this.nbCouleurs-1)+1; // On ne veut pas 0 (vacante)
 	}
 	
 	/**
@@ -120,12 +119,17 @@ private void setNbCellulesVacantes(int nbCellulesVacantes) {
 			y = this.randomGenerator.nextInt(this.getNbLignes());
 			c = super.getCellule(x, y);
 		} while (!c.estVivante());
-	super.setEtatCourant(x, y, EtatS.Vacante);
-	this.cellulesVacantes.add(new Cellule(x, y, EtatS.Vacante));
+	super.setEtatCourant(x, y, 0);
+	this.cellulesVacantes.add(new Cellule(x, y));
 	}
 	
 	private void demenagement(Cellule c) {
 		// On cherche une cellule vacante
+		if (this.cellulesVacantes.size() == 0) {
+			// On ne peut pas déplacer la famille, plus de place libre pour ce step.
+			return;
+		}
+		
 		int index = this.randomGenerator.nextInt(this.cellulesVacantes.size());
 		Cellule cible = this.cellulesVacantes.get(index);
 		int x = cible.getXInt();
@@ -135,7 +139,7 @@ this.cellulesVacantes.remove(index);
 // On déplace la famille
 super.setEtatSuiv(x, y, c.getEtat());
 // On libère une cellule pour le tour suivant
-this.newCellulesVacantes.add(new Cellule(c.getXInt(), c.getYInt(), EtatS.Vacante));
+this.newCellulesVacantes.add( new Cellule(c.getXInt(), c.getYInt()));
 	}
 		
 	
