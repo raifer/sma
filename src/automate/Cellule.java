@@ -1,5 +1,6 @@
 package automate;
 
+import java.awt.Color;
 import java.awt.Point;
 
 @SuppressWarnings("serial")
@@ -19,6 +20,24 @@ public class Cellule extends Point {
 	// Les get set
 	public int getEtat() {
 		return this.etat;
+	}
+	
+	public Color getCouleur() {
+		switch (this.etat) {
+		case 0 :
+			return Color.white;
+		case 1 :
+			return Color.black;
+		case 2 :
+			return Color.blue;
+		case 3 :
+			return Color.green;
+		case 4 :
+			return Color.yellow;
+			default :
+				throw new IllegalArgumentException("Il n'y a pas de couleur pour l'état " + this.etat);
+//				return Color.red;
+		}
 	}
 	
 	public void setEtat(int etat) {
