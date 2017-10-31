@@ -48,6 +48,10 @@ public class Schelling extends AutomateCellulaire {
 	 */
 	List<Cellule> newCellulesVacantes = new LinkedList<Cellule>();
 	
+	/**
+	 * Objet permettant de générer des entier aléatoire dans un range
+	 * 
+	 */
 	private Random randomGenerator;
 
 	/**
@@ -55,12 +59,8 @@ public class Schelling extends AutomateCellulaire {
 	 * Le seuil est de 3 et le nombre de couleurs de 4
 	 */
 	public Schelling() {
-		super();
-		this.setK(3);
-		this.setNbCouleurs(4);
-		this.setNbCellulesVacantes(20);
-		this.randomGenerator = new Random();
-		this.placeCellulesVacantes(nbCellulesVacantes);
+		// k=3, nbCouleur=4
+		this(3, 4);
 	}
 	
 	/**
@@ -75,6 +75,7 @@ public class Schelling extends AutomateCellulaire {
 		this.setNbCouleurs(nbCouleurs);
 		this.setNbCellulesVacantes(20);
 		this.randomGenerator = new Random();
+		// Placement des cellules vacantes
 		this.placeCellulesVacantes(nbCellulesVacantes);
 	}
 	
