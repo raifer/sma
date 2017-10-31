@@ -30,15 +30,15 @@ public abstract class AutomateCellulaire {
 	public AutomateCellulaire(int nbLignes, int nbColonnes) {
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
-		this.grilleCour = new Cellule[nbLignes][nbColonnes];
-		this.grilleSuiv = new Cellule[nbLignes][nbColonnes];
-		this.grilleOri = new Cellule[nbLignes][nbColonnes];
+		this.grilleCour = new Cellule[nbColonnes][nbLignes];
+		this.grilleSuiv = new Cellule[nbColonnes][nbLignes];
+		this.grilleOri = new Cellule[nbColonnes][nbLignes];
 		// Génération de la grille
-		for (int i=0; i<nbLignes; i++) {
-			for (int j=0; j<nbColonnes; j++){
-				this.grilleCour[i][j] = new Cellule(i,j);
-				this.grilleOri[i][j] = new Cellule(i,j);
-				this.grilleSuiv[i][j] = new Cellule(i,j);
+		for (int y=0; y<nbLignes; y++) {
+			for (int x=0; x<nbColonnes; x++){
+				this.grilleCour[x][y] = new Cellule(x, y);
+				this.grilleOri[x][y] = new Cellule(x,y);
+				this.grilleSuiv[x][y] = new Cellule(x, y);
 			}
 		}
 	}
@@ -48,11 +48,11 @@ public abstract class AutomateCellulaire {
 	 */
 	public void InitEtat() {
 		randomGenerator= new Random();
-		for (int i=0; i<nbLignes; i++) {
-			for (int j=0; j<nbColonnes; j++){
+		for (int y=0; y<nbLignes; y++) {
+			for (int x=0; x<nbColonnes; x++){
 				int etat = this.randomEtat();
-				this.setEtatCourant(i,j,etat);
-				this.setEtatOri(i,j,etat);
+				this.setEtatCourant(x, y, etat);
+				this.setEtatOri(x, y,etat);
 			}
 		}
 	}
@@ -127,10 +127,10 @@ public abstract class AutomateCellulaire {
 		default:
 			throw new IllegalArgumentException("La position du voisin doit être compris entre 1 et 8");
 		}
-		if (x< 0) x = nbLignes-1;
-		if (x == nbLignes) x = 0;
-		if (y < 0) y = nbColonnes-1;
-		if (y == nbColonnes) y = 0;
+		if (x< 0) x = nbColonnes-1;
+		if (x == nbColonnes) x = 0;
+		if (y < 0) y = nbLignes-1;
+		if (y == nbLignes) y = 0;
 
 		return this.getCellule(x, y);
 	}

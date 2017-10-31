@@ -20,4 +20,8 @@ public class SchellingSimulator extends AutomateSimulator<Schelling> {
 	public SchellingSimulator(GUISimulator gui,int seuil, int nbCouleurs, int nbVacantes) {
 		super( new Schelling(seuil, nbCouleurs, nbVacantes), gui);
 	}
+	
+	public SchellingSimulator(GUISimulator gui,int seuil, int nbCouleurs, int nbVacantes, int nbLignes, int nbColonnes) {
+		super( new Schelling(seuil, nbCouleurs, nbVacantes, nbLignes, nbColonnes), gui);
+	}
 }

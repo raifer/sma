@@ -17,7 +17,12 @@ public class TestSchellingSimulator {
 		int k = 3;
 		int nbCouleurs = 4;
 		int nbVacantes = 20;
-        gui.setSimulable(new SchellingSimulator(gui, k, nbCouleurs, nbVacantes)); // test avec seuil 3 et 4 couleurs
+		int nbLignes = 10;
+		int nbColonnes = 10;
+		
+		//SchellingSimulator cS = new SchellingSimulator(gui, k, nbCouleurs, nbVacantes);
+		SchellingSimulator cS = new SchellingSimulator(gui, k, nbCouleurs, nbVacantes, nbLignes, nbColonnes);
+        gui.setSimulable(cS); // test avec seuil 3 et 4 couleurs
 	}
 
 }
