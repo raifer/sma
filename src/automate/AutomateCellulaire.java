@@ -177,13 +177,14 @@ public abstract class AutomateCellulaire {
 	 * 
 	 */
 	public void majAutomate(){
+		System.out.println("Mise à jour de la grille");
 		for (int x=0; x < this.getNbLignes(); x++) {
 			for (int y=0; y < this.getNbColonnes(); y++){
 				majCellule(getCellule(x,y));	
 			}
 		}
 		// Inversion des deux grilles.
-		Cellule[][] grilleSAV = new Cellule[NB_LIGNES][NB_COLONNES];
+		Cellule[][] grilleSAV;
 		grilleSAV = this.grilleCour;
 		this.grilleCour = this.grilleSuiv;
 		this.grilleSuiv = grilleSAV;
