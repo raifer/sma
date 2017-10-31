@@ -22,12 +22,12 @@ public class Schelling extends AutomateCellulaire {
 	 * Si une famille de couleur c a plus de K voisins de couleur différente alors la famille déménage, 
 	 */
 	private int k;
-	
+
 	/**
 	 * Nombre de couleur pour la simulation 
 	 */
 	private int nbCouleurs;
-	
+
 	/**
 	 * Nombre de cellules vacantes dans la grille
 	 */
@@ -47,7 +47,7 @@ public class Schelling extends AutomateCellulaire {
 	 *List qui va contenir les nouvelles cellules vaccantes 
 	 */
 	List<Cellule> newCellulesVacantes = new LinkedList<Cellule>();
-	
+
 	/**
 	 * Objet permettant de générer des entier aléatoire dans un range
 	 * 
@@ -62,7 +62,7 @@ public class Schelling extends AutomateCellulaire {
 		// k=3, nbCouleur=4
 		this(3, 4);
 	}
-	
+
 	/**
 	 * Constructeur
 	 * @param k le seuil
@@ -78,20 +78,20 @@ public class Schelling extends AutomateCellulaire {
 		// Placement des cellules vacantes
 		this.placeCellulesVacantes(nbCellulesVacantes);
 	}
-	
+
 	/**
 	 * @param k the k to set
 	 */
 	private void setK(int k) {
 		if (k>8){
 			throw new IllegalArgumentException("Le seuil de voisins ne peut pas être supérieur à 8.");
-	//		return Color.red;
+			//		return Color.red;
 		}
 		else {
 			this.k=k;
 		}
 	}
-	
+
 	/**
 	 * Donne le nombre de couleur différentes dans l'automate
 	 * @return the nbCouleur
@@ -99,12 +99,12 @@ public class Schelling extends AutomateCellulaire {
 	public int getNbCouleurs() {
 		return nbCouleurs;
 	}
-	
+
 	/**
 	 * @param nbCouleur the nbCouleur to set
 	 */
 	private void setNbCouleurs(int nbCouleur) {
-		
+
 		if (nbCouleurs>9 && nbCouleur < 0){
 			throw new IllegalArgumentException("Le nombre de couleurs peut être de 9 au maximum");
 		}
@@ -125,43 +125,55 @@ public class Schelling extends AutomateCellulaire {
 	private void setNbCellulesVacantes(int nbCellulesVacantes) {
 		this.nbCellulesVacantes = nbCellulesVacantes;
 	}
-	
-		/**
-		 * Trouve un entier alétoire compris entre 1 et le nombre de couleurs
-		 */
-		@Override
-		int randomEtat() {
-			return randomGenerator.nextInt(this.nbCouleurs) + 1;
-			//return (int)(Math.random()*(this.nbCouleurs+1)); ==> Ligne qui fonctionne maintenant
+
+	/**
+	 * Trouve un entier alétoire compris entre 1 et le nombre de couleurs
+	 */
+	@Override
+	int randomEtat() {
+		return randomGenerator.nextInt(this.nbCouleurs) + 1;
+		//return (int)(Math.random()*(this.nbCouleurs+1)); ==> Ligne qui fonctionne maintenant
+	}
+
+	/**
+	 * Placer un nombre spécifique de cellules vacantes sur la grille courante
+	 *  
+	 * @param nbVacantes Nombre de cellule vacantes à placer sur la grille
+	 */
+	private void placeCellulesVacantes(int nbVacantes) {
+		for(int i=0; i < nbVacantes; i++) {
+			this.placeRandomCelluleVacante();
 		}
-		
-		/**
-		 * Placer un nombre spécifique de cellules vacantes sur la grille courante
-		 *  
-		 * @param nbVacantes Nombre de cellule vacantes à placer sur la grille
-		 */
-		private void placeCellulesVacantes(int nbVacantes) {
-			for(int i=0; i < nbVacantes; i++) {
-				this.placeRandomCelluleVacante();
-			}
-		}
-		
-		/**
-		 * Remplace une cellule occupée choisie au hasard par une vacante 
-		 */
-		private void placeRandomCelluleVacante() {
-			Cellule c;
-			int x, y;
-			// On cherche une cellule occupé pour la remplacer
-			do {
-				x = this.randomGenerator.nextInt(this.getNbColonnes());
-				y = this.randomGenerator.nextInt(this.getNbLignes());
-				c = super.getCellule(x, y);
-			} while (!c.estVivante());
+	}
+
+	/**
+	 * Remplace une cellule occupée choisie au hasard par une vacante 
+	 */
+	private void placeRandomCelluleVacante() {
+		Cellule c;
+		int x, y;
+		// On cherche une cellule occupé pour la remplacer
+		do {
+			x = this.randomGenerator.nextInt(this.getNbColonnes());
+			y = this.randomGenerator.nextInt(this.getNbLignes());
+			c = super.getCellule(x, y);
+		} while (!c.estVivante());
 		super.setEtatCourant(x, y, 0);
 		this.cellulesVacantes.add(new Cellule(x, y));
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see automate.AutomateCellulaire#majAutomate()
+	 * Surchargé pour mettre à jour la liste des cellules vacantes
+	 */
+	@Override
+	public void majAutomate(){
+		super.majAutomate();
+		// Ajout des nouvelle cellules vacantes dans la liste des cellules vacantes
+		this.cellulesVacantes.addAll(this.newCellulesVacantes);
+		this.newCellulesVacantes.clear();
+	}
+
 	/**
 	 * Prend la famille de la cellule c en paramettre et la déplace sur une cellule vacante
 	 * Si plus de cellule vacante pour ce step, on ne déplace pas la famille
@@ -172,32 +184,37 @@ public class Schelling extends AutomateCellulaire {
 		// On cherche une cellule vacante
 		if (this.cellulesVacantes.size() == 0) {
 			// On ne peut pas déplacer la famille, plus de place libre pour ce step.
+			// Elle reste sur place
+			this.setEtatSuiv(c.getXInt(), c.getYInt(), c.getEtat());
 			return;
 		}
-		
+
 		// On prend une place libre au hasart
 		int index = this.randomGenerator.nextInt(this.cellulesVacantes.size());
 		Cellule cible = this.cellulesVacantes.get(index);
 		int x = cible.getXInt();
 		int y = cible.getYInt();
-		
+
 		// On supprim la place libre
 		this.cellulesVacantes.remove(index);
 		// On déplace la famille dans la nouvelle cellule
-		super.setEtatSuiv(x, y, c.getEtat());
+		this.setEtatSuiv(x, y, c.getEtat());
 		// On libère donc la place pour le step suivant
 		this.newCellulesVacantes.add( new Cellule(c.getXInt(), c.getYInt()));
 	}
-		
+
 	/* (non-Javadoc)
 	 * @see automate.AutomateCellulaire#majCellule(automate.Cellule)
 	 */
 	@Override
 	void majCellule(Cellule c) {
-// Si la cellule est vacante , on ne fait rien.
-		if (c.estVivante()) return;
-		
-		// Il faut compter le nombre de voisins différents
+		// Si la cellule est vacante , on ne fait rien de particulié.
+		if (! c.estVivante()) {
+			this.setEtatSuiv( c.getXInt(), c.getYInt(), c.getEtat());
+			return;
+		}
+		// La cellule est habitée
+		// Il faut compter le nombre de voisins différents pour s	savoir si on déménage
 		int nbPasCommeNous = 0;
 		for (int i=1; i<=8; i++) {
 			Cellule v = super.getVoisin(c, i);
@@ -205,10 +222,13 @@ public class Schelling extends AutomateCellulaire {
 					&& v.estVivante()) 
 				nbPasCommeNous++;
 		}
-		 // Si une famille de couleur c a plus de K voisins (sur huit) de couleur différente, elle déménage 
-		if (nbPasCommeNous > this.k) 
+		// Si une famille de couleur c a plus de K voisins (sur huit) de couleur différente, elle déménage 
+		if (nbPasCommeNous > this.k)  
 			this.demenagement(c);
-		// Sinon, on ne fait rien.
+		else {
+			// La famille se sent bien, elle reste sur place
+			this.setEtatSuiv(c.getXInt(), c.getYInt(), c.getEtat());
+		}
 	}
-	
+
 }
