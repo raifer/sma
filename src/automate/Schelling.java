@@ -93,6 +93,7 @@ public class Schelling extends AutomateCellulaire {
 	}
 	
 	/**
+	 * Donne le nombre de couleur différentes dans l'automate
 	 * @return the nbCouleur
 	 */
 	public int getNbCouleurs() {
@@ -104,15 +105,19 @@ public class Schelling extends AutomateCellulaire {
 	 */
 	private void setNbCouleurs(int nbCouleur) {
 		
-		if (nbCouleurs>9){
+		if (nbCouleurs>9 && nbCouleur < 0){
 			throw new IllegalArgumentException("Le nombre de couleurs peut être de 9 au maximum");
-	//		return Color.red;
 		}
 		else {
 			this.nbCouleurs = nbCouleur;
 		}
 	}
 
+	/**
+	 * Retourne le paramètre du nombre de cellules vacantes de l'automate
+	 * 
+	 * @return Le nombre de cellule vacantes (fixe)
+	 */
 	public int getNbCellulesVacantes() {
 		return nbCellulesVacantes;
 	}
@@ -126,7 +131,7 @@ public class Schelling extends AutomateCellulaire {
 		 */
 		@Override
 		int randomEtat() {
-			return (int)((Math.random()*(this.nbCouleurs))+1); //+1 car l'on souhaite avoir 0 (blanc) réserver aux cellules vacantes
+			return randomGenerator.nextInt(this.nbCouleurs) + 1;
 		}
 		
 		/**
@@ -156,6 +161,12 @@ public class Schelling extends AutomateCellulaire {
 		this.cellulesVacantes.add(new Cellule(x, y));
 	}
 	
+	/**
+	 * Prend la famille de la cellule c en paramettre et la déplace sur une cellule vacante
+	 * Si plus de cellule vacante pour ce step, on ne déplace pas la famille
+	 * 
+	 * @param c La cellule à déménager
+	 */
 	private void demenagement(Cellule c) {
 		// On cherche une cellule vacante
 		if (this.cellulesVacantes.size() == 0) {
