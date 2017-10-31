@@ -61,6 +61,7 @@ public abstract class AutomateCellulaire {
 	 * @param position Valeur de 1 à 8, 1 en haut à gauche puis on tourne dans le sense des aiguilles d'une montre.
 	 * 
 	 * @return Retourne la cellule voisine à la position i.
+	 * @throw IllegalArgument Si la position n'est pas comprise entre 1 et 8
 	 */
 	protected Cellule getVoisin(Cellule c, int position){
 
