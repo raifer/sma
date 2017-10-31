@@ -162,26 +162,40 @@ public class Schelling extends AutomateCellulaire {
 			return;
 		}
 		
+		// On prend une place libre au hasart
 		int index = this.randomGenerator.nextInt(this.cellulesVacantes.size());
 		Cellule cible = this.cellulesVacantes.get(index);
 		int x = cible.getXInt();
 		int y = cible.getYInt();
+		
 		// On supprim la place libre
 		this.cellulesVacantes.remove(index);
-		// On déplace la famille
+		// On déplace la famille dans la nouvelle cellule
 		super.setEtatSuiv(x, y, c.getEtat());
-		// On libère une cellule pour le tour suivant
+		// On libère donc la place pour le step suivant
 		this.newCellulesVacantes.add( new Cellule(c.getXInt(), c.getYInt()));
 	}
 		
-	
 	/* (non-Javadoc)
 	 * @see automate.AutomateCellulaire#majCellule(automate.Cellule)
 	 */
 	@Override
 	void majCellule(Cellule c) {
-		// TODO Auto-generated method stub
-
+// Si la cellule est vacante , on ne fait rien.
+		if (c.estVivante()) return;
+		
+		// Il faut compter le nombre de voisins différents
+		int nbPasCommeNous = 0;
+		for (int i=1; i<=8; i++) {
+			Cellule v = super.getVoisin(c, i);
+			if( c.getEtat() != v.getEtat()
+					&& v.estVivante()) 
+				nbPasCommeNous++;
+		}
+		 // Si une famille de couleur c a plus de K voisins (sur huit) de couleur différente, elle déménage 
+		if (nbPasCommeNous > this.k) 
+			this.demenagement(c);
+		// Sinon, on ne fait rien.
 	}
-
+	
 }
