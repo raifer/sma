@@ -17,7 +17,7 @@ public class SchellingSimulator extends AutomateSimulator<Schelling> {
 	 *@param seuil du jeu
 	 *@param nombre de couleurs du jeu
 	 */
-	public SchellingSimulator(GUISimulator gui,int seuil, int nbCouleurs) {
-		super( new Schelling(seuil,nbCouleurs), gui);
+	public SchellingSimulator(GUISimulator gui,int seuil, int nbCouleurs, int nbVacantes) {
+		super( new Schelling(seuil, nbCouleurs, nbVacantes), gui);
 	}
 }

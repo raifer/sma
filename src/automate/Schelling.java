@@ -59,8 +59,8 @@ public class Schelling extends AutomateCellulaire {
 	 * Le seuil est de 3 et le nombre de couleurs de 4
 	 */
 	public Schelling() {
-		// k=3, nbCouleur=4
-		this(3, 4);
+		// k=3, nbCouleur=4, nbVacante=30
+		this(3, 4, 20);
 	}
 
 	/**
@@ -68,12 +68,13 @@ public class Schelling extends AutomateCellulaire {
 	 * @param k le seuil
 	 * @param nbCouleurs le nombre de couleur sur la grille 
 	 * (sans compter le blanc qui représente une habitation vacante)
+	 * @param nbVacantes Nombre de cellule vacantes dans la grille
 	 */
-	public Schelling(int k,int nbCouleurs) {
+	public Schelling(int k,int nbCouleurs, int nbVacantes) {
 		super();
 		this.setK(k);
 		this.setNbCouleurs(nbCouleurs);
-		this.setNbCellulesVacantes(20);
+		this.setNbCellulesVacantes(nbVacantes);
 		this.InitEtat();
 		// Placement des cellules vacantes
 		this.placeCellulesVacantes(nbCellulesVacantes);
