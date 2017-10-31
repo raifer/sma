@@ -170,18 +170,16 @@ public abstract class AutomateCellulaire {
 	abstract void majCellule(Cellule c);
 
 	/**
-	 * Réinitialise l'automate. Chaque cellule est fixée aléatoirement.
+	 * Réinitialise l'automate. Chaque cellule est remise à son état d'origine
 	 */
 	public void reInit() {
-		int etat;
-		for (int i=0; i<NB_LIGNES; i++) {
-			for (int j=0; j<NB_COLONNES; j++){
-				etat = this.randomEtat();
-				this.grilleCour[i][j].setEtat(etat);
-				this.grilleOri[i][j].setEtat(etat);
-				this.grilleSuiv[i][j].setEtat(etat);;
+		
+		for (int y=0; y<NB_LIGNES; y++) {
+			for (int x=0; x<NB_COLONNES; x++){
+				this.setEtatCourant(x, y,
+						this.grilleOri[x][y].getEtat());
 			}
 		}
-
 	}
+
 }
