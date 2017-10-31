@@ -12,35 +12,44 @@ import java.util.Random;
 
 public abstract class AutomateCellulaire {
 
-	private int NB_LIGNES = 10;
-	private int NB_COLONNES = 10;
+	private int nbLignes;
+	private int nbColonnes;
 
 	/** Grille des cellules à l'instant t */
-	private Cellule[][] grilleCour = new Cellule[NB_LIGNES][NB_COLONNES];
+	private Cellule[][] grilleCour;
 	/** Grille de cellules à l'instant t+1 */
-	private Cellule[][] grilleSuiv = new Cellule[NB_LIGNES][NB_COLONNES];
+	private Cellule[][] grilleSuiv = new Cellule[nbLignes][nbColonnes];
 	/** Grille de cellules pour sauvegarder les états d'origines. */
-	private Cellule[][] grilleOri = new Cellule[NB_LIGNES][NB_COLONNES];
+	private Cellule[][] grilleOri = new Cellule[nbLignes][nbColonnes];
 	protected Random randomGenerator;  // Objet permettant de géner un entier aléatoire
 
 	public AutomateCellulaire() {
+		this(10, 10);
+	}
+
+	public AutomateCellulaire(int nbLignes, int nbColonnes) {
+		this.nbLignes = nbLignes;
+		this.nbColonnes = nbColonnes;
+		this.grilleCour = new Cellule[nbLignes][nbColonnes];
+		this.grilleSuiv = new Cellule[nbLignes][nbColonnes];
+		this.grilleOri = new Cellule[nbLignes][nbColonnes];
 		// Génération de la grille
-		for (int i=0; i<NB_LIGNES; i++) {
-			for (int j=0; j<NB_COLONNES; j++){
+		for (int i=0; i<nbLignes; i++) {
+			for (int j=0; j<nbColonnes; j++){
 				this.grilleCour[i][j] = new Cellule(i,j);
 				this.grilleOri[i][j] = new Cellule(i,j);
 				this.grilleSuiv[i][j] = new Cellule(i,j);
 			}
 		}
 	}
-	
+
 	/**
 	 * Initialisation des états lors de la création du jeu
 	 */
 	public void InitEtat() {
 		randomGenerator= new Random();
-		for (int i=0; i<NB_LIGNES; i++) {
-			for (int j=0; j<NB_COLONNES; j++){
+		for (int i=0; i<nbLignes; i++) {
+			for (int j=0; j<nbColonnes; j++){
 				int etat = this.randomEtat();
 				this.setEtatCourant(i,j,etat);
 				this.setEtatOri(i,j,etat);
@@ -56,7 +65,7 @@ public abstract class AutomateCellulaire {
 	 * @return Retourne le nombre de ligne de la grille du l'automate.
 	 */
 	public int getNbLignes() {
-		return this.NB_LIGNES;
+		return this.nbLignes;
 	}
 
 	/**
@@ -65,7 +74,7 @@ public abstract class AutomateCellulaire {
 	 * @return Nombre de ligne
 	 */
 	public int getNbColonnes() {
-		return this.NB_COLONNES;
+		return this.nbColonnes;
 	}
 
 	// Méthodes
@@ -118,10 +127,10 @@ public abstract class AutomateCellulaire {
 		default:
 			throw new IllegalArgumentException("La position du voisin doit être compris entre 1 et 8");
 		}
-		if (x< 0) x = NB_LIGNES-1;
-		if (x == NB_LIGNES) x = 0;
-		if (y < 0) y = NB_COLONNES-1;
-		if (y == NB_COLONNES) y = 0;
+		if (x< 0) x = nbLignes-1;
+		if (x == nbLignes) x = 0;
+		if (y < 0) y = nbColonnes-1;
+		if (y == nbColonnes) y = 0;
 
 		return this.getCellule(x, y);
 	}
@@ -159,7 +168,7 @@ public abstract class AutomateCellulaire {
 	protected void setEtatCourant(int x, int y, int etat) {
 		grilleCour[x][y].setEtat(etat);
 	}
-	
+
 	/**
 	 * Modifie l'état Original d'une cellule de coordonnées x, y.
 	 * 
@@ -177,9 +186,8 @@ public abstract class AutomateCellulaire {
 	 * 
 	 */
 	public void majAutomate(){
-		System.out.println("Mise à jour de la grille");
-		for (int x=0; x < this.getNbLignes(); x++) {
-			for (int y=0; y < this.getNbColonnes(); y++){
+		for (int y=0; y < this.getNbLignes(); y++) {
+			for (int x=0; x < this.getNbColonnes(); x++){
 				majCellule(getCellule(x,y));	
 			}
 		}
@@ -201,13 +209,13 @@ public abstract class AutomateCellulaire {
 	 * Réinitialise l'automate. Chaque cellule est remise à son état d'origine
 	 */
 	public void reInit() {
-		for (int y=0; y<NB_LIGNES; y++) {
-			for (int x=0; x<NB_COLONNES; x++){
+		for (int y=0; y<nbLignes; y++) {
+			for (int x=0; x<nbColonnes; x++){
 				this.setEtatCourant(x, y,
 						this.grilleOri[x][y].getEtat());
 			}
 		}
-		
+
 	}
 
 }

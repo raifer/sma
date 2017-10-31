@@ -57,21 +57,31 @@ public class Schelling extends AutomateCellulaire {
 	/**
 	 * Constructeur par défaut 
 	 * Le seuil est de 3 et le nombre de couleurs de 4
+	 * cellules vacantes de 20 et grillle 10x10
 	 */
 	public Schelling() {
-		// k=3, nbCouleur=4, nbVacante=30
 		this(3, 4, 20);
 	}
 
 	/**
-	 * Constructeur
+	 * Construction de l'automate de schelling avec grille 10x10 par défaut
 	 * @param k le seuil
 	 * @param nbCouleurs le nombre de couleur sur la grille 
 	 * (sans compter le blanc qui représente une habitation vacante)
 	 * @param nbVacantes Nombre de cellule vacantes dans la grille
 	 */
 	public Schelling(int k,int nbCouleurs, int nbVacantes) {
-		super();
+		this(k, nbCouleurs, nbVacantes, 10, 10);
+	}
+	
+	/**
+	 * Constructeur où l'on précise la taille de la grille
+	 * 
+	 * @param nbLignes nombre de ligne dans la grille
+	 * @param nbColonnes nombre de colonnes dans la grille
+	 */
+	public Schelling(int k,int nbCouleurs, int nbVacantes, int nbLignes, int nbColonnes) {
+		super(nbLignes, nbColonnes);
 		this.setK(k);
 		this.setNbCouleurs(nbCouleurs);
 		this.setNbCellulesVacantes(nbVacantes);
