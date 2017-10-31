@@ -3,8 +3,10 @@
  */
 package automate;
 
+import java.util.Random;
+
 /**
- * @author Mathieu
+ * @author Mathieu Picardv
  *
  */
 
@@ -19,18 +21,32 @@ public abstract class AutomateCellulaire {
 	private Cellule[][] grilleSuiv = new Cellule[NB_LIGNES][NB_COLONNES];
 	/** Grille de cellules pour sauvegarder les états d'origines. */
 	private Cellule[][] grilleOri = new Cellule[NB_LIGNES][NB_COLONNES];
+	protected Random randomGenerator;  // Objet permettant de géner un entier aléatoire
 
 	public AutomateCellulaire() {
 		// Génération de la grille
 		for (int i=0; i<NB_LIGNES; i++) {
 			for (int j=0; j<NB_COLONNES; j++){
-				int etat = this.randomEtat();
-				this.grilleCour[i][j] = new Cellule(i,j,etat);
-				this.grilleOri[i][j] = new Cellule(i,j,etat);
+				this.grilleCour[i][j] = new Cellule(i,j);
+				this.grilleOri[i][j] = new Cellule(i,j);
 				this.grilleSuiv[i][j] = new Cellule(i,j);
 			}
 		}
-	}		
+	}
+	
+	/**
+	 * Initialisation des états lors de la création du jeu
+	 */
+	public void InitEtat() {
+		randomGenerator= new Random();
+		for (int i=0; i<NB_LIGNES; i++) {
+			for (int j=0; j<NB_COLONNES; j++){
+				int etat = this.randomEtat();
+				this.setEtatCourant(i,j,etat);
+				this.setEtatOri(i,j,etat);
+			}
+		}
+	}
 
 	abstract int randomEtat ();
 
@@ -143,6 +159,17 @@ public abstract class AutomateCellulaire {
 	protected void setEtatCourant(int x, int y, int etat) {
 		grilleCour[x][y].setEtat(etat);
 	}
+	
+	/**
+	 * Modifie l'état Original d'une cellule de coordonnées x, y.
+	 * 
+	 * @param x Position x de la cellule à modifier
+	 * @param y Position y de la cellule à modifier
+	 * @param etat Nouvelle etat de la cellule à modifier
+	 */
+	protected void setEtatOri(int x, int y, int etat) {
+		grilleOri[x][y].setEtat(etat);
+	}
 
 
 	/**
@@ -173,13 +200,13 @@ public abstract class AutomateCellulaire {
 	 * Réinitialise l'automate. Chaque cellule est remise à son état d'origine
 	 */
 	public void reInit() {
-		
 		for (int y=0; y<NB_LIGNES; y++) {
 			for (int x=0; x<NB_COLONNES; x++){
 				this.setEtatCourant(x, y,
 						this.grilleOri[x][y].getEtat());
 			}
 		}
+		
 	}
 
 }

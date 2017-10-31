@@ -52,7 +52,7 @@ public class Schelling extends AutomateCellulaire {
 	 * Objet permettant de générer des entier aléatoire dans un range
 	 * 
 	 */
-	private Random randomGenerator;
+	private Random randomGenerator = new Random();
 
 	/**
 	 * Constructeur par défaut 
@@ -74,7 +74,7 @@ public class Schelling extends AutomateCellulaire {
 		this.setK(k);
 		this.setNbCouleurs(nbCouleurs);
 		this.setNbCellulesVacantes(20);
-		this.randomGenerator = new Random();
+		this.InitEtat();
 		// Placement des cellules vacantes
 		this.placeCellulesVacantes(nbCellulesVacantes);
 	}
@@ -132,6 +132,7 @@ public class Schelling extends AutomateCellulaire {
 		@Override
 		int randomEtat() {
 			return randomGenerator.nextInt(this.nbCouleurs) + 1;
+			//return (int)(Math.random()*(this.nbCouleurs+1)); ==> Ligne qui fonctionne maintenant
 		}
 		
 		/**

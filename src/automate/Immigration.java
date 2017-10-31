@@ -1,4 +1,5 @@
 package automate;
+
 /**
  * 
  * @author PicardV
@@ -17,12 +18,15 @@ public class Immigration extends AutomateCellulaire {
 		this.setN(4);
 	}
 	
+	
 	/**
 	 * Constructeur
 	 * @param Le nombre d'état du jeu
 	 */
 	public Immigration(int n){
+		super();
 		this.setN(n);
+		this.InitEtat();
 	}
 	
 	/**
@@ -53,7 +57,7 @@ public class Immigration extends AutomateCellulaire {
 	 */
 	@Override
 	int randomEtat() {
-		return (int)((Math.random()*(this.n))+1); 
+		return (int)(Math.random()*(this.n)); 
 	}
 
 	@Override

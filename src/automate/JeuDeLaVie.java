@@ -1,7 +1,22 @@
 package automate;
-
+/**
+ * 
+ * @author picarv mathieu claire
+ *
+ */
 public class JeuDeLaVie extends AutomateCellulaire{
 	
+	/**
+	 * Constructeur
+	 */
+	public JeuDeLaVie (){
+		super();
+		this.InitEtat();
+	}
+	
+	/**
+	 * Génère un état aléatoire
+	 */
 	int randomEtat () {
 		double p;
 		p = Math.random();
