@@ -1,6 +1,5 @@
 package automate;
 /**
- * 
  * @author picarv mathieu claire
  *
  */
@@ -27,10 +26,8 @@ public class JeuDeLaVie extends AutomateCellulaire{
 			return 0;
 	}
 
-
 	/**
 	 *Calcule le future état de la cellule c et le stoque dans la grille suivante.
-	 *
 	 * @param c La cellule à mettre à jour.
 	 */
 	protected void majCellule(Cellule c){

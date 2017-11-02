@@ -18,7 +18,6 @@ public class Immigration extends AutomateCellulaire {
 		this.setN(4);
 	}
 	
-	
 	/**
 	 * Constructeur
 	 * @param Le nombre d'état du jeu
@@ -57,9 +56,12 @@ public class Immigration extends AutomateCellulaire {
 	 */
 	@Override
 	int randomEtat() {
-		return (int)(Math.random()*(this.n)); 
+		return randomGenerator.nextInt(this.n);
 	}
 
+	/**
+	 * Mise à jour des cellules selon les règles du jeu de l'immigration.
+	 */
 	@Override
 	void majCellule(Cellule c) {
 		int x = c.getXInt();

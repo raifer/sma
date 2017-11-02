@@ -1,5 +1,4 @@
 package automate;
-
 import gui.GUISimulator;
 import gui.Simulable;
 import gui.Rectangle;
@@ -15,7 +14,11 @@ public class AutomateSimulator<Automate extends AutomateCellulaire> implements S
     protected  Automate notreAutomate;
     protected GUISimulator gui;
     
-
+    /**
+     * Constructeur
+     * @param automate Automate variable en fonction du jeu choisi
+     * @param gui Interface graphique
+     */
     public AutomateSimulator(Automate automate, GUISimulator gui){
         this.notreAutomate = automate;
         this.gui = gui;
@@ -41,8 +44,7 @@ public class AutomateSimulator<Automate extends AutomateCellulaire> implements S
     }
 
     /**
-     * Mise à jour des cellule après un pas
-     * puis affichage
+     * Mise à jour des cellule après un pas puis affichage
      */
     @Override
     public void next() {
@@ -50,10 +52,9 @@ public class AutomateSimulator<Automate extends AutomateCellulaire> implements S
         this.drawAutomate();
     }
 
-    	/**
-    	 * Réinitialisation des cellules
-    	 * puis affichage
-    	 */
+    /**
+    * Réinitialisation des cellules puis affichage
+    */
     @Override
     public void restart() {
         this.notreAutomate.reInit();

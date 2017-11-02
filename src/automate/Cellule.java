@@ -3,7 +3,6 @@
  * 
  */
 package automate;
-
 import java.awt.Color;
 import java.awt.Point;
 
@@ -12,20 +11,38 @@ public class Cellule extends Point {
 
 	private int etat;
 
+	/**
+	 * Construteur initialisant la position d'une cellule sur les axes x et y
+	 * @param x
+	 * @param y
+	 */
 	public Cellule(int x, int y) {
 		this.setLocation(x, y);
 	}
-		
+	
+	/**
+	 * Constructeur initialissant la position d'une cellule sur les axes x ainsi que son état
+	 * @param x
+	 * @param y
+	 * @param etat
+	 */
 	public Cellule(int x, int y, int etat) {
 		this(x, y);
 		this.setEtat(etat);		
 	}
 	
-	// Les get set
+	/**
+	 * Renvoie de l'état d'une cellule
+	 * @return état de la cellule
+	 */
 	public int getEtat() {
 		return this.etat;
 	}
 	
+	/**
+	 * Retour de la couleur d'un état d'une cellule
+	 * @return Color couleur de la cellule
+	 */
 	public Color getCouleur() {
 		switch (this.etat) {
 		case 0 :
@@ -54,20 +71,34 @@ public class Cellule extends Point {
 		}
 	}
 	
+	/**
+	 * Initialisation de l'état d'une cellule
+	 * @param etat de la cellule
+	 */
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
 	
+	/**
+	 * Renvoi de la coordonée x d'une cellule
+	 * @return x Coordonnée x
+	 */
 	public int getXInt() {
 		return (int)super.getX();
 	}
 	
+	/**
+	 * Renvoi de la coordonnée y d'une cellule
+	 * @return y coordonnée y
+	 */
 	public int getYInt() {
 		return (int)super.getY();
 	}
 	
-	// Les méthodes
-	
+	/**
+	 * Dit si une cellule est morte ou vivante
+	 * @return un booléen =1 pour vivant =0 pour mort
+	 */
 	public boolean estVivante() {
 		if (this.etat > 0){
 			return true;

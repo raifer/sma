@@ -1,14 +1,10 @@
 package automate;
+import java.awt.Color;
+import gui.GUISimulator;
 /**
  * @author picardv
  * 
  */
-
-import java.awt.Color;
-
-
-import gui.GUISimulator;
-
 public class TestSchellingSimulator {
 
 	public static void main(String[] args) {
