@@ -1,15 +1,7 @@
 package boids.util;
 
 /**
- * @author raifer
- *
- */
-/**
- * @author raifer
- *
- */
-/**
- * @author raifer
+ * @author Mathieu
  *
  */
 public class Vector {
@@ -108,4 +100,3 @@ public class Vector {
     	return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
     }
 }
-
