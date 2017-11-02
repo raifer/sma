@@ -218,8 +218,10 @@ public class Schelling extends AutomateCellulaire {
 	 */
 	@Override
 	void majCellule(Cellule c) {
-		// Si la cellule est vacante , on ne fait rien de particulié.
-		if (! c.estVivante()) {
+		// Si la cellule est vacante
+		if (! c.estVivante() &&
+			// Si la cellule vacante n'a pas été prise par une précedente famille, on la recopie sur la grille suivante
+			 this.cellulesVacantes.contains(c) ) { 
 			this.setEtatSuiv( c.getXInt(), c.getYInt(), c.getEtat());
 			return;
 		}
