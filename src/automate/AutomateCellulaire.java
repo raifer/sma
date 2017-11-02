@@ -28,23 +28,35 @@ public abstract class AutomateCellulaire {
 	}
 
 	public AutomateCellulaire(int nbLignes, int nbColonnes) {
+		this.randomGenerator= new Random();
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
 		this.grilleCour = new Cellule[nbColonnes][nbLignes];
 		this.grilleSuiv = new Cellule[nbColonnes][nbLignes];
 		this.grilleOri = new Cellule[nbColonnes][nbLignes];
-		this.randomGenerator= new Random();
 		// Génération de la grille
 		for (int y=0; y<nbLignes; y++) {
 			for (int x=0; x<nbColonnes; x++){
-				int etat = this.randomEtat();
-				this.grilleCour[x][y] = new Cellule(x, y, etat);
-				this.grilleOri[x][y] = new Cellule(x,y, etat);
+				this.grilleCour[x][y] = new Cellule(x, y);
+				this.grilleOri[x][y] = new Cellule(x,y);
 				this.grilleSuiv[x][y] = new Cellule(x, y);
 			}
 		}
 	}
-	
+
+	/**
+	 * Initialisation des états lors de la création du jeu
+	 */
+	public void InitEtat() {
+		for (int y=0; y<nbLignes; y++) {
+			for (int x=0; x<nbColonnes; x++){
+				int etat = this.randomEtat();
+				this.setEtatCourant(x, y, etat);
+				this.setEtatOri(x, y,etat);
+			}
+		}
+	}
+
 	abstract int randomEtat ();
 
 	/**

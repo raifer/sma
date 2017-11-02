@@ -52,7 +52,6 @@ public class Schelling extends AutomateCellulaire {
 	 * Objet permettant de générer des entier aléatoire dans un range
 	 * 
 	 */
-	private Random randomGenerator = new Random();
 
 	/**
 	 * Constructeur par défaut 
