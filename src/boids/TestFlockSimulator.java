@@ -18,8 +18,8 @@ public class TestFlockSimulator {
 	 */
 	public static void main(String[] args) {
 		
-		int height = 1000;
-		int width = 1500;
+		int height = 1500;
+		int width = 2000;
 		GUISimulator gui = new GUISimulator(height, width, Color.BLACK);
 FlockSimulator flockSimu = new FlockSimulator(gui);
         gui.setSimulable(flockSimu);
