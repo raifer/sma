@@ -30,6 +30,7 @@ public class FlockSimulator implements Simulable {
 	 */
 	protected void drawFlock(){
 		gui.reset();
+		// Il faut désinner quelques chose et qu'il soit orientable.
 		for (Boid boid : flock.getBoids()) {
 			Vector c = boid.getPosition();
 			gui.addGraphicalElement(
