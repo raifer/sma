@@ -125,4 +125,11 @@ public class Vector {
     public double abs() {
     	return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
     }
+
+public Vector distance( Vector other) {
+	 return new Vector(
+			 this.getX() - other.getX(), 
+			 this.getY() - other.getY());
+}
+
 }
