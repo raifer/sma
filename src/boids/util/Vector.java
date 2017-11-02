@@ -44,6 +44,27 @@ public class Vector {
         this.y = y;
     }
     
+    public double getX() {
+    	return this.x;
+    }
+    
+    public double getY() {
+    	return this.y;
+    }
+    
+    public void setX( double x) {
+    	this.x = x;
+    }
+    
+    public void setY( double y) {
+    	this.y = y;
+    }
+    
+    public void translate(double xD, double yD) {
+    	this.setX( this.getX() + xD);
+    	this.setY( this.getY() + yD);
+    }
+    
     /**
      * Performs addition of two vector.
      * 
