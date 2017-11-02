@@ -91,7 +91,7 @@ this.width = width;
 
 		for (Boid aBoid : boids) {
 			if(!aBoid.equals(cBoid)) {
-				center = center.add(aBoid.getPosition());
+				center.translate(aBoid.getPosition());
 			}
 		}
 		center = center.division(boids.size() - 1 );
@@ -118,9 +118,9 @@ this.width = width;
 		for (Boid aBoid : boids) {
 			if (!aBoid.equals(cBoid)) {
 				Vector aPosition = aBoid.getPosition();
-				Vector xD = new Vector(aPosition.getX() - cPosition.getX(), aPosition.getY() - cPosition.getY());
+				Vector xD = aPosition.distance(cPosition);
 
-				if(Math.abs(xD.getX()) < seperationDistance && Math.abs(xD.getY()) < seperationDistance) {	
+				if( xD.abs() < seperationDistance ) {
 					correction = correction.subtract(xD).division(seperationFactor);
 				}
 
