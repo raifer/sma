@@ -10,8 +10,6 @@ package automate;
 
 import java.util.LinkedList;
 import java.util.List;
-//import java.util.Iterator;
-import java.util.Random;
 
 
 public class Schelling extends AutomateCellulaire {
@@ -140,9 +138,8 @@ public class Schelling extends AutomateCellulaire {
 	 * Trouve un entier alétoire compris entre 1 et le nombre de couleurs
 	 */
 	@Override
-	int randomEtat() {
+	protected int randomEtat() {
 		return randomGenerator.nextInt(this.nbCouleurs) + 1;
-		//return (int)(Math.random()*(this.nbCouleurs+1)); ==> Ligne qui fonctionne maintenant
 	}
 
 	/**
