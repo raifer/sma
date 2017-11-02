@@ -1,8 +1,5 @@
 package boids;
 
-// Importation de notre vecteur
-import boids.util.Vector;
-
 /**
  * Chaque boids représente un membre de flock
  * 
@@ -116,4 +113,8 @@ public class Boid {
 		return this.name;
 	}
 
+	public void applyVelocity() {
+		this.position.translate(this.velocity);
+	}
+	
 }

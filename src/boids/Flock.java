@@ -72,9 +72,7 @@ this.width = width;
 			//sum = sum.add(v5);
 
 			cBoid.setVelocity(cBoid.getVelocity().add(sum));
-			Vector next = new Vector( cBoid.getPosition().add(cBoid.getVelocity()) );
-			cBoid.setPosition(next);
-
+			cBoid.applyVelocity();
 		}//end iteration through flock
 	}
 

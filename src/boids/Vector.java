@@ -60,6 +60,11 @@ public class Vector {
     	this.y = y;
     }
     
+    public void translate(Vector vD) {
+    	this.setX(this.getX() + vD.getX());
+    	this.setY(this.getY() + vD.getY());
+    }
+    
     public void translate(double xD, double yD) {
     	this.setX( this.getX() + xD);
     	this.setY( this.getY() + yD);
