@@ -4,42 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import boids.util.Vector;
-
 /** 
  * 
- * The flock class turns individual boid objects into a coordinated group.
- * 
- * A number of rules are applied to ensure the flock exhibits the desired characteristics. 
- * 
- * @author Shaun Plummer
+ * @author Mathieu
  *
  */
 public class Flock {
+	
+	/** Largeur et heuteur où va pouvoir évoluer le troupeau*/
+	private int width, height;
+	/** List qui va contenir les boids évoluants au cours de la simu */
 	private List<Boid> boids = new ArrayList<Boid>();
+	/** Sauvegarde de la liste des boids pour la remise à zéro */
+	private List<Boid> boidsOri = new ArrayList<Boid>();
+	
+	// Paramètre de la simu
 	private double movementFactor = 1000; 		//Used in rule 1
 	private double boundingFactor = 10; 		//Used in rule 1
 	private int seperationDistance = 13;		//Used in rule 2
 	private double seperationFactor = 50; 	//Used in rule 2
 
-
-	public Flock() {
-
+	public Flock(int width, int height) {
+this.width = width;
+		this.height = height;
 		//Random numbers scatters boids start positions
 		Random randNum = new Random();
 		RandomName randName = new RandomName();
 
 		for(int i = 0; i < 25; i++) {
-			int  x = randNum.nextInt(1200) + 1;
-			int  y = randNum.nextInt(1000) + 1;
+			// Je ne comprend pas le +1 qui était là
+			int  x = randNum.nextInt(this.width) + 1;
+			int  y = randNum.nextInt(this.height) + 1;
 
 			boids.add(new Boid(x,y, randName.getName() ));
+			boidsOri.add(new Boid(x,y, randName.getName() ));
 		}
-
 	} // end constructor
 
 	public void reInit() {
-		//To do.
+		this.boids.clear();
+		this.boids.addAll(this.boidsOri);
 	}
 
 	public List<Boid> getBoids() {
