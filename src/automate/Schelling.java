@@ -216,12 +216,15 @@ public class Schelling extends AutomateCellulaire {
 	@Override
 	void majCellule(Cellule c) {
 		// Si la cellule est vacante
-		if (! c.estVivante() &&
+		if (! c.estVivante()) {
 			// Si la cellule vacante n'a pas été prise par une précedente famille, on la recopie sur la grille suivante
-			 this.cellulesVacantes.contains(c) ) { 
+			 if (this.cellulesVacantes.contains(c) ) { 
 			this.setEtatSuiv( c.getXInt(), c.getYInt(), c.getEtat());
 			return;
-		}
+			 } else 
+				 // La cellule vacante à été utilisé par une famille, on ne fait rien
+				 return;
+	}
 		// La cellule est habitée
 		// Il faut compter le nombre de voisins différents pour s	savoir si on déménage
 		int nbPasCommeNous = 0;
