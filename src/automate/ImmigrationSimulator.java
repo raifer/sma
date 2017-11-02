@@ -1,10 +1,5 @@
-/**
- * 
- */
 package automate;
-
 import gui.GUISimulator;
-
 /**
  * @author Mathieu Picardv
  *

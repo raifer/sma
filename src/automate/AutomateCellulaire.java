@@ -1,8 +1,4 @@
-/**
- * 
- */
 package automate;
-
 import java.util.Random;
 
 /**
@@ -14,19 +10,25 @@ public abstract class AutomateCellulaire {
 
 	private int nbLignes;
 	private int nbColonnes;
-
-	/** Grille des cellules à l'instant t */
-	private Cellule[][] grilleCour;
-	/** Grille de cellules à l'instant t+1 */
-	private Cellule[][] grilleSuiv = new Cellule[nbLignes][nbColonnes];
-	/** Grille de cellules pour sauvegarder les états d'origines. */
-	private Cellule[][] grilleOri = new Cellule[nbLignes][nbColonnes];
+	
+	private Cellule[][] grilleCour;// Grille des cellules à l'instant t
+	private Cellule[][] grilleSuiv = new Cellule[nbLignes][nbColonnes];// Grille de cellules à l'instant t+1 
+	private Cellule[][] grilleOri = new Cellule[nbLignes][nbColonnes];//Grille de cellules pour sauvegarder les états d'origines. 
+	
 	protected Random randomGenerator;  // Objet permettant de géner un entier aléatoire
 
+	/**
+	 * Constructeur par défaut
+	 */
 	public AutomateCellulaire() {
 		this(10, 10);
 	}
-
+	
+	/**
+	 * Constructeur avec choix de lignes et colonnes
+	 * @param nbLignes nombre de lignes
+	 * @param nbColonnes nombre de colonnes
+	 */
 	public AutomateCellulaire(int nbLignes, int nbColonnes) {
 		this.randomGenerator= new Random();
 		this.nbLignes = nbLignes;
@@ -61,7 +63,6 @@ public abstract class AutomateCellulaire {
 
 	/**
 	 * Retourne le nombre de ligne de l'automate cellulaire.
-	 * 
 	 * @return Retourne le nombre de ligne de la grille du l'automate.
 	 */
 	public int getNbLignes() {
@@ -70,18 +71,15 @@ public abstract class AutomateCellulaire {
 
 	/**
 	 * Retourne le nombre de colonnes du jeux de l'automate cellulaire.
-	 * 
 	 * @return Nombre de ligne
 	 */
 	public int getNbColonnes() {
 		return this.nbColonnes;
-	}
-
-	// Méthodes
+	}	
 
 	/**
 	 * Récupérer la cellule voisine de c à la position i.
-	 * 
+	 *
 	 * @param c Cellule dont on recherche un voisin
 	 * @param position Valeur de 1 à 8, 1 en haut à gauche puis on tourne dans le sense des aiguilles d'une montre.
 	 * 
@@ -200,7 +198,6 @@ public abstract class AutomateCellulaire {
 
 	/**
 	 *Calcule le future état de la cellule c et le stoque dans la grille suivante.
-	 *
 	 * @param c La cellule à mettre à jour.
 	 */
 	abstract void majCellule(Cellule c);

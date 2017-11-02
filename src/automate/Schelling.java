@@ -1,58 +1,24 @@
-/**
- * 
- */
 package automate;
-
+import java.util.LinkedList;
+import java.util.List;
 /**
  * @author Mathieu picardv
  *
  */
-
-import java.util.LinkedList;
-import java.util.List;
-//import java.util.Iterator;
-import java.util.Random;
-
-
 public class Schelling extends AutomateCellulaire {
 
-	/** 
-	 * Seuil k de la simulation
-	 * 
-	 * Si une famille de couleur c a plus de K voisins de couleur différente alors la famille déménage, 
-	 */
-	private int k;
+	private int k;	//Seuil k de la simulation si une famille de couleur c a plus de K voisins de couleur différente alors la famille déménage, 
+	private int nbCouleurs;//Nombre de couleur pour la simulation 
+	private int nbCellulesVacantes;	//Nombre de cellules vacantes dans la grille
 
 	/**
-	 * Nombre de couleur pour la simulation 
-	 */
-	private int nbCouleurs;
-
-	/**
-	 * Nombre de cellules vacantes dans la grille
-	 */
-	private int nbCellulesVacantes;
-
-	/**
-	 * list qui contient toutes les cellules vacantes
-	 * 
 	 * Choix d'd'une liste chaîné car :
 	 * - Pas d'accès concurant;
 	 * - Besoin d'accès par indice.
 	 */
-	List<Cellule> cellulesVacantes = new LinkedList<Cellule>();
-
-
-	/**
-	 *List qui va contenir les nouvelles cellules vaccantes 
-	 */
-	List<Cellule> newCellulesVacantes = new LinkedList<Cellule>();
-
-	/**
-	 * Objet permettant de générer des entier aléatoire dans un range
-	 * 
-	 */
-
+	List<Cellule> cellulesVacantes = new LinkedList<Cellule>(); //list qui contient toutes les cellules vacantes
+	List<Cellule> newCellulesVacantes = new LinkedList<Cellule>();//List qui va contenir les nouvelles cellules vaccantes 
+	
 	/**
 	 * Constructeur par défaut 
 	 * Le seuil est de 3 et le nombre de couleurs de 4
@@ -75,7 +41,6 @@ public class Schelling extends AutomateCellulaire {
 	
 	/**
 	 * Constructeur où l'on précise la taille de la grille
-	 * 
 	 * @param nbLignes nombre de ligne dans la grille
 	 * @param nbColonnes nombre de colonnes dans la grille
 	 */
@@ -103,7 +68,7 @@ public class Schelling extends AutomateCellulaire {
 	}
 
 	/**
-	 * Donne le nombre de couleur différentes dans l'automate
+	 * Donne le nombre de couleurs différentes dans l'automate
 	 * @return the nbCouleur
 	 */
 	public int getNbCouleurs() {
@@ -125,13 +90,16 @@ public class Schelling extends AutomateCellulaire {
 
 	/**
 	 * Retourne le paramètre du nombre de cellules vacantes de l'automate
-	 * 
 	 * @return Le nombre de cellule vacantes (fixe)
 	 */
 	public int getNbCellulesVacantes() {
 		return nbCellulesVacantes;
 	}
 
+	/**
+	 * Initialisation du nombre de cellules vacantes
+	 * @param nbCellulesVacantes
+	 */
 	private void setNbCellulesVacantes(int nbCellulesVacantes) {
 		this.nbCellulesVacantes = nbCellulesVacantes;
 	}
@@ -142,12 +110,10 @@ public class Schelling extends AutomateCellulaire {
 	@Override
 	int randomEtat() {
 		return randomGenerator.nextInt(this.nbCouleurs) + 1;
-		//return (int)(Math.random()*(this.nbCouleurs+1)); ==> Ligne qui fonctionne maintenant
 	}
 
 	/**
 	 * Placer un nombre spécifique de cellules vacantes sur la grille courante
-	 *  
 	 * @param nbVacantes Nombre de cellule vacantes à placer sur la grille
 	 */
 	private void placeCellulesVacantes(int nbVacantes) {
@@ -172,12 +138,15 @@ public class Schelling extends AutomateCellulaire {
 		this.cellulesVacantes.add(new Cellule(x, y));
 	}
 
-	/* (non-Javadoc)
-	 * @see automate.AutomateCellulaire#majAutomate()
-	 * Surchargé pour mettre à jour la liste des cellules vacantes
+	/**
+	 * Mise à jour de l'automate selon les règles de Schelling
 	 */
 	@Override
 	public void majAutomate(){
+		/* (non-Javadoc)
+		 * @see automate.AutomateCellulaire#majAutomate()
+		 * Surchargé pour mettre à jour la liste des cellules vacantes
+		 */
 		super.majAutomate();
 		// Ajout des nouvelle cellules vacantes dans la liste des cellules vacantes
 		this.cellulesVacantes.addAll(this.newCellulesVacantes);
@@ -187,7 +156,6 @@ public class Schelling extends AutomateCellulaire {
 	/**
 	 * Prend la famille de la cellule c en paramettre et la déplace sur une cellule vacante
 	 * Si plus de cellule vacante pour ce step, on ne déplace pas la famille
-	 * 
 	 * @param c La cellule à déménager
 	 */
 	private void demenagement(Cellule c) {
@@ -213,11 +181,14 @@ public class Schelling extends AutomateCellulaire {
 		this.newCellulesVacantes.add( new Cellule(c.getXInt(), c.getYInt()));
 	}
 
-	/* (non-Javadoc)
-	 * @see automate.AutomateCellulaire#majCellule(automate.Cellule)
+	/**
+	 * Mise à jour des cellules selon les règles de Schelling
 	 */
 	@Override
 	void majCellule(Cellule c) {
+		/* (non-Javadoc)
+		 * @see automate.AutomateCellulaire#majCellule(automate.Cellule)
+		 */
 		// Si la cellule est vacante , on ne fait rien de particulié.
 		if (! c.estVivante()) {
 			this.setEtatSuiv( c.getXInt(), c.getYInt(), c.getEtat());
