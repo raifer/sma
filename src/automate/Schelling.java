@@ -70,7 +70,7 @@ public class Schelling extends AutomateCellulaire {
 	public Schelling(int k,int nbCouleurs, int nbVacantes) {
 		this(k, nbCouleurs, nbVacantes, 10, 10);
 	}
-	
+
 	/**
 	 * Constructeur où l'on précise la taille de la grille
 	 * 
@@ -206,6 +206,7 @@ public class Schelling extends AutomateCellulaire {
 		this.cellulesVacantes.remove(index);
 		// On déplace la famille dans la nouvelle cellule
 		this.setEtatSuiv(x, y, c.getEtat());
+		this.setEtatSuiv(c.getXInt(), c.getYInt(), 0);
 		// On libère donc la place pour le step suivant
 		this.newCellulesVacantes.add( new Cellule(c.getXInt(), c.getYInt()));
 	}
@@ -218,13 +219,13 @@ public class Schelling extends AutomateCellulaire {
 		// Si la cellule est vacante
 		if (! c.estVivante()) {
 			// Si la cellule vacante n'a pas été prise par une précedente famille, on la recopie sur la grille suivante
-			 if (this.cellulesVacantes.contains(c) ) { 
-			this.setEtatSuiv( c.getXInt(), c.getYInt(), c.getEtat());
-			return;
-			 } else 
-				 // La cellule vacante à été utilisé par une famille, on ne fait rien
-				 return;
-	}
+			if (this.cellulesVacantes.contains(c) ) { 
+				this.setEtatSuiv( c.getXInt(), c.getYInt(), c.getEtat());
+				return;
+			} else 
+				// La cellule vacante à été utilisé par une famille, on ne fait rien
+				return;
+		}
 		// La cellule est habitée
 		// Il faut compter le nombre de voisins différents pour s	savoir si on déménage
 		int nbPasCommeNous = 0;
