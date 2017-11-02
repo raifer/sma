@@ -1,4 +1,4 @@
-package boids.util;
+package boids;
 
 /**
  * @author Mathieu

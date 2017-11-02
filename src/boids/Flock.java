@@ -1,4 +1,4 @@
-package boids.model;
+package boids;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package boids.model;
+package boids;
 
 // Importation de notre vecteur
 import boids.util.Vector;
