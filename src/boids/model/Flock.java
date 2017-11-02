@@ -16,7 +16,7 @@ import boids.util.Vector;
  *
  */
 public class Flock {
-    private ArrayList<Boid> boids;
+    private List<Boid> boids = new ArrayList<Boid>();
     private double movementFactor = 1000; 		//Used in rule 1
     private double boundingFactor = 10; 		//Used in rule 1
     private int seperationDistance = 13;		//Used in rule 2
@@ -24,7 +24,6 @@ public class Flock {
 
 
     public Flock() {
-    	boids = new ArrayList<Boid>();
 
 		//Random numbers scatters boids start positions
 		Random randNum = new Random();
@@ -38,6 +37,10 @@ public class Flock {
 		}
 		
     } // end constructor
+    
+    public List<Boid> getBoids() {
+    	return this.boids;
+    }
 
     /**
      * Updates the position coordinates of each boid in the flock. By applying the rules that govern 
