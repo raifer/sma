@@ -166,6 +166,7 @@ public class Schelling extends AutomateCellulaire {
 			c = super.getCellule(x, y);
 		} while (!c.estVivante());
 		super.setEtatCourant(x, y, 0);
+		super.setEtatOri(x, y, 0);
 		this.cellulesVacantes.add(new Cellule(x, y));
 	}
 
