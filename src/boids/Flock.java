@@ -19,10 +19,13 @@ public class Flock {
 	private List<Boid> boidsOri = new ArrayList<Boid>();
 	
 	// Paramètre de la simu
-	private double movementFactor = 1000; 		//Used in rule 1
-	private int seperationDistance = 13;		//Used in rule 2
-	private double seperationFactor = 50; 	//Used in rule 2
-	private double boundingFactor = 20; 		//Used in rule 4
+	private final double movementFactor = 1000; 		//Used in rule 1
+	private final int seperationDistance = 80;		//Used in rule 2
+	private final double seperationFactor = 20; 	//Used in rule 2
+	private final double boundingFactor = 20; 		//Used in rule 4
+	private final double attractionFactor = 2000;
+	
+	private Vector food = new Vector(100, 100);
 	
 	public Flock(int width, int height) {
 		this(width, height, 5);
@@ -67,15 +70,16 @@ this.width = width;
 			v4 = bounding(cBoid);
 			System.out.println("V4");
 			System.out.println(v4);
-			v5 = positionTend(cBoid);
+			v5 = pointAttraction(cBoid);
 
 			Vector sum = new Vector();
 			sum = sum.add(v1);
-//			sum = sum.add(v2);
+			sum = sum.add(v2);
 //			sum = sum.add(v3);
 			sum = sum.add(v4);
-			//sum = sum.add(v5);
+			sum = sum.add(v5);
 
+			
 			cBoid.setVelocity(cBoid.getVelocity().add(sum));
 			cBoid.applyVelocity();
 		}//end iteration through flock
@@ -123,14 +127,15 @@ this.width = width;
 		for (Boid aBoid : boids) {
 			if (!aBoid.equals(cBoid)) {
 				Vector aPosition = aBoid.getPosition();
-				Vector xD = aPosition.distance(cPosition);
+				Vector dist = aPosition.distance(cPosition);
 
-				if( xD.abs() < seperationDistance ) {
-					correction = correction.subtract(xD).division(seperationFactor);
+				if( dist.abs() < seperationDistance ) {
+					correction = correction.subtract(dist);
 				}
 
 			}
 		}
+		correction = correction.division(seperationFactor);
 		return correction;
 	}
 
@@ -201,13 +206,16 @@ this.width = width;
 	 * @param cBoid	The boid which the rule is applied to
 	 * @return	Vector	A grid position moving the boid towards points of attraction
 	 */
-	private Vector positionTend(Boid cBoid) {
-		Vector place = new Vector(600,450);	//Sample coordinates in the centre of the screen
+	private Vector pointAttraction(Boid cBoid) {
+
 		Vector tend = new Vector();
-
-		tend = new Vector(place.subtract(cBoid.getPosition()));
-		tend.division(100);		//Movement factor moving the boid a percentage of the distance to the attration point
-
+		tend = this.food.distance(cBoid.getPosition());
+		int max = 20;
+		if (tend.getX() > max) tend.setX(max);;
+		if (tend.getX() < -max) tend.setX(-max);;
+		if (tend.getY() > max) tend.setY(max);;
+		if (tend.getY() < -max) tend.setY(-max);;
+		tend = tend.division(this.attractionFactor);
 		return tend;
 	}
 	
