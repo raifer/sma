@@ -19,10 +19,14 @@ public class FlockSimulator implements Simulable {
 	private int width;
 	
 	public FlockSimulator(GUISimulator gui){
+		this(gui, 20);
+	}
+	
+		public FlockSimulator(GUISimulator gui, int nb_boids){
 		this.gui = gui;
 		 this.height = gui.getPanelHeight() - 200;
 		this.width = gui.getPanelWidth() - 100;
-		this.flock = new Flock(this.width, this.height);
+		this.flock = new Flock(this.width, this.height, nb_boids);
 		this.drawFlock();
 	}
 
