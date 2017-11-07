@@ -122,6 +122,8 @@ public class Boid {
 		s += this.getName();
 		s += " ";
 		s += this.getPosition().toString();
+		s += " - ";
+		s += this.getVelocity();
 		return s;
 	}
 	
