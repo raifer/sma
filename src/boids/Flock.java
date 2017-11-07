@@ -20,12 +20,12 @@ public class Flock {
 	
 	// Paramètre de la simu
 	private double movementFactor = 1000; 		//Used in rule 1
-	private double boundingFactor = 10; 		//Used in rule 1
 	private int seperationDistance = 13;		//Used in rule 2
 	private double seperationFactor = 50; 	//Used in rule 2
+	private double boundingFactor = 20; 		//Used in rule 4
 	
 	public Flock(int width, int height) {
-		this(width, height, 25);
+		this(width, height, 5);
 	}
 	
 	public Flock(int width, int height, int nb_boids) {
@@ -55,8 +55,7 @@ this.width = width;
 	}
 
 	/**
-	 * Updates the position coordinates of each boid in the flock. By applying the rules that govern 
-	 * the behaviour of the group to each one in turn.
+	 * Calcul et met à jour la position des boids
 	 */
 	public void updateBoidsPostion() {
 		Vector v1, v2, v3, v4, v5 = new Vector();
@@ -66,12 +65,14 @@ this.width = width;
 			v2 = collisionAvoidance(cBoid);
 			v3 = matchFlockVelocity(cBoid);
 			v4 = bounding(cBoid);
+			System.out.println("V4");
+			System.out.println(v4);
 			v5 = positionTend(cBoid);
 
 			Vector sum = new Vector();
 			sum = sum.add(v1);
-			sum = sum.add(v2);
-			sum = sum.add(v3);
+//			sum = sum.add(v2);
+//			sum = sum.add(v3);
 			sum = sum.add(v4);
 			//sum = sum.add(v5);
 
@@ -165,20 +166,24 @@ this.width = width;
 	 */
 	private Vector bounding(Boid cBoid) {
 		Vector bound = new Vector();
-		int xMin = 0, xMax = this.width; 
-		int yMin = 0, yMax = this.height;
+		int border = 100;
+		int xMin = border, xMax = this.width- border; 
+		int yMin = border, yMax = this.height- border;
 
 		Vector cPos = cBoid.getPosition();
-		int xD=0, yD=0;
-		if (cPos.getX() < xMin) {
-			xD = 1;
-		} else if (cPos.getX() > xMax){
-			xD = -1;
+		double  x = cPos.getX();
+		double  y = cPos.getY();
+		double xD=0, yD=0;
+		
+		if (x < xMin) {
+			xD = xMin - x;;
+		} else if (x > xMax){
+			xD = xMax - x;;
 		}
-		if (cPos.getY() < yMin) {
-			yD = 1;
-		} else if (cPos.getY() > yMax){
-			yD = -1;
+		if (y < yMin) {
+			yD = yMin - y;;
+		} else if (y > yMax){
+			yD = yMax - y;
 		}
 
 		bound.translate(xD, yD);
