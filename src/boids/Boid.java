@@ -117,4 +117,12 @@ public class Boid {
 		this.position.translate(this.velocity);
 	}
 	
+	public String toString() {
+		String s = new String();
+		s += this.getName();
+		s += " ";
+		s += this.getPosition().toString();
+		return s;
+	}
+	
 }

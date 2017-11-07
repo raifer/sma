@@ -132,4 +132,11 @@ public Vector distance( Vector other) {
 			 this.getY() - other.getY());
 }
 
+public String toString() {
+	String s = new String();
+	s += this.getX();
+	s += "; ";
+	s += this.getY();
+	return s;
+}
 }

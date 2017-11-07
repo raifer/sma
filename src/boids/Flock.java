@@ -23,15 +23,19 @@ public class Flock {
 	private double boundingFactor = 10; 		//Used in rule 1
 	private int seperationDistance = 13;		//Used in rule 2
 	private double seperationFactor = 50; 	//Used in rule 2
-
+	
 	public Flock(int width, int height) {
+		this(width, height, 25);
+	}
+	
+	public Flock(int width, int height, int nb_boids) {
 this.width = width;
 		this.height = height;
 		//Random numbers scatters boids start positions
 		Random randNum = new Random();
 		RandomName randName = new RandomName();
 
-		for(int i = 0; i < 25; i++) {
+		for(int i = 0; i < nb_boids; i++) {
 			// Je ne comprend pas le +1 qui était là
 			int  x = randNum.nextInt(this.width) + 1;
 			int  y = randNum.nextInt(this.height) + 1;
@@ -161,7 +165,8 @@ this.width = width;
 	 */
 	private Vector bounding(Boid cBoid) {
 		Vector bound = new Vector();
-		int xMin = 0, xMax = 1200, yMin = 0, yMax = 900;
+		int xMin = 0, xMax = this.width; 
+		int yMin = 0, yMax = this.height;
 
 		Vector cPos = cBoid.getPosition();
 		int xD=0, yD=0;
@@ -200,4 +205,14 @@ this.width = width;
 
 		return tend;
 	}
+	
+	public String toString() {
+		String s = new String();
+		for (Boid b : this.boids) {
+			s += b.toString();
+			s += "\n";
+		}
+		return s;
+	}
+	
 }
