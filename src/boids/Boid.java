@@ -28,7 +28,7 @@ public class Boid {
 	 * Vitesse maximale du boid
 	 * 
 	 */
-	protected final int speedMax = 2;
+	protected final double speedMax = 2;
     
 	protected String name;
 
