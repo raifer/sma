@@ -1,6 +1,6 @@
 package boids;
 
-public class MajPrédateurs extends Event {
+public class MajPredateurs extends Event {
 	
 	/*
 	 * Mise à jour des prédateurs

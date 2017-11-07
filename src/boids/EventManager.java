@@ -36,7 +36,7 @@ class EventManager {
 		
 	}
 	public boolean isFinished() {
-		
+		return true;
 	}
 	public void restart() {
 		

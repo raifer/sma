@@ -1,6 +1,6 @@
 package boids;
 
-public class ProiesPrédateurs {
+public class ProiesPredateurs {
 	private Flock proies;
 	private Flock prédateurs;
 }
