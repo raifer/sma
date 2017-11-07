@@ -1,5 +1,4 @@
-package model;
-
+package boids;
 import java.util.ArrayList;
 import java.util.Random;
 
