@@ -68,8 +68,6 @@ this.width = width;
 			v2 = collisionAvoidance(cBoid);
 			v3 = matchFlockVelocity(cBoid);
 			v4 = bounding(cBoid);
-			System.out.println("V4");
-			System.out.println(v4);
 			v5 = pointAttraction(cBoid);
 
 			Vector sum = new Vector();
