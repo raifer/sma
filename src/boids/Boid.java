@@ -28,7 +28,7 @@ public class Boid {
 	 * Vitesse maximale du boid
 	 * 
 	 */
-	protected final double speedMax = 2;
+	protected final double speedMax = 3;
     
 	protected String name;
 
@@ -71,9 +71,15 @@ public class Boid {
 		if ( velocity.x > speedMax) {
 			velocity.x = speedMax;
 		}
+		if ( velocity.x < -speedMax) {
+			velocity.x = -speedMax;
+		}
 		if ( velocity.y > speedMax) {
 			velocity.y = speedMax;
 		} 
+		if ( velocity.y < -speedMax) {
+			velocity.y = -speedMax;
+		}
 		
 		this.velocity = velocity;
 	}
