@@ -13,18 +13,25 @@ public class Flock {
 	
 	/** Largeur et heuteur où va pouvoir évoluer le troupeau*/
 	private int width, height;
+	
 	/** List qui va contenir les boids évoluants au cours de la simu */
 	private List<Boid> boids = new ArrayList<Boid>();
 	/** Sauvegarde de la liste des boids pour la remise à zéro */
 	private List<Boid> boidsOri = new ArrayList<Boid>();
 	
-	// Paramètre de la simu
-	private final double movementFactor = 1000; 		//Used in rule 1
-	private final int seperationDistance = 80;		//Used in rule 2
-	private final double seperationFactor = 20; 	//Used in rule 2
-	private final double boundingFactor = 20; 		//Used in rule 4
-	private final double attractionFactor = 2000;
-	
+	// Paramètre du Flock
+	private double coefFiltreVelocity = 1;
+		
+	//Règle 1 : Déplacement vers le centre du groupe.
+	private double groupCenterFactor = 800;
+	// Règle 2 : Séparation entre les boids.
+	private int seperationDistance = 80;
+	private double seperationFactor = 20;
+	//Règle 4 : Evite le bord de la fenêtre de simulation
+	private int boundingDistance = 80;
+	private double boundingFactor = 20;
+	// Règle 5 : Attraction vers la nourriture
+	private double attractionFactor = 2000;
 	private Vector food = new Vector(100, 100);
 	
 	public Flock(int width, int height) {
@@ -34,6 +41,18 @@ public class Flock {
 	public Flock(int width, int height, int nb_boids) {
 this.width = width;
 		this.height = height;
+		//Règle 1 : Déplacement vers le centre du groupe.
+		groupCenterFactor = 800;
+		// Règle 2 : Séparation entre les boids.
+		seperationDistance = 80;
+		seperationFactor = 20;
+		//Règle 4 : Evite le bord de la fenêtre de simulation
+		boundingDistance = 80;
+		boundingFactor = 20;
+		// Règle 5 : Attraction vers la nourriture
+		attractionFactor = 20;
+		food = new Vector(500, 0);
+		
 		//Random numbers scatters boids start positions
 		Random randNum = new Random();
 		RandomName randName = new RandomName();
@@ -48,6 +67,10 @@ this.width = width;
 		}
 	} // end constructor
 
+	public void setFood(Vector food) {
+		this.food = food;
+	}
+	
 	public void reInit() {
 		this.boids.clear();
 		this.boids.addAll(this.boidsOri);
@@ -71,14 +94,18 @@ this.width = width;
 			v5 = pointAttraction(cBoid);
 
 			Vector sum = new Vector();
+			// GroupFlock
 			sum = sum.add(v1);
+			// Collision avoidance
 			sum = sum.add(v2);
+			// Match Flock Velocity
 //			sum = sum.add(v3);
+			// Bouding Avoidance
 			sum = sum.add(v4);
+			 // Food attraction
 			sum = sum.add(v5);
 
-			
-			cBoid.setVelocity(cBoid.getVelocity().add(sum));
+			cBoid.setVelocity(cBoid.getVelocity().division(this.coefFiltreVelocity).add(sum));
 			cBoid.applyVelocity();
 		}//end iteration through flock
 	}
@@ -98,12 +125,12 @@ this.width = width;
 
 		for (Boid aBoid : boids) {
 			if(!aBoid.equals(cBoid)) {
-				center.translate(aBoid.getPosition());
+				center = center.add(aBoid.getPosition());
 			}
 		}
 		center = center.division(boids.size() - 1 );
 		center = center.subtract(cBoid.getPosition());
-		center = center.division(movementFactor);
+		center = center.division(groupCenterFactor);
 
 		return center;   
 	}
