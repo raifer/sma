@@ -31,8 +31,8 @@ public abstract class AutomateCellulaire {
 	 */
 	public AutomateCellulaire(int nbLignes, int nbColonnes) {
 		this.randomGenerator= new Random();
-		this.nbLignes = nbLignes;
-		this.nbColonnes = nbColonnes;
+		this.setNbLignes (nbLignes);
+		this.setNbColonnes (nbColonnes);
 		this.grilleCour = new Cellule[nbColonnes][nbLignes];
 		this.grilleSuiv = new Cellule[nbColonnes][nbLignes];
 		this.grilleOri = new Cellule[nbColonnes][nbLignes];
@@ -75,7 +75,35 @@ public abstract class AutomateCellulaire {
 	 */
 	public int getNbColonnes() {
 		return this.nbColonnes;
-	}	
+	}
+	
+	/**
+	 * Modifie le nombre de lignes
+	 * @param nbLignes
+	 */
+	public void setNbLignes(int nbLignes){		
+		if (nbLignes>100|| nbLignes < 1){
+			throw new IllegalArgumentException("Le jeu ne peut avoir que de 1 à 100 lignes");
+//			return Color.red;
+		}
+		else {
+			this.nbLignes=nbLignes;
+		}
+	}
+	
+	/**
+	 * Modifie le nombre de colonnes
+	 * @param nbColonnes
+	 */
+	public void setNbColonnes(int nbColonnes){
+		if (nbColonnes>100|| nbColonnes < 1){
+			throw new IllegalArgumentException("Le jeu ne peut avoir que de 1 à 100 colonnes");
+//			return Color.red;
+		}
+		else {
+			this.nbColonnes=nbColonnes;
+		}
+	}
 
 	/**
 	 * Récupérer la cellule voisine de c à la position i.

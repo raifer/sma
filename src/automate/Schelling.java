@@ -16,7 +16,6 @@ public class Schelling extends AutomateCellulaire {
 
 	/** 
 	 * Seuil k de la simulation
-	 * 
 	 * Si une famille de couleur c a plus de K voisins de couleur différente alors la famille déménage, 
 	 */
 	private int k;
@@ -33,7 +32,6 @@ public class Schelling extends AutomateCellulaire {
 
 	/**
 	 * list qui contient toutes les cellules vacantes
-	 * 
 	 * Choix d'd'une liste chaîné car :
 	 * - Pas d'accès concurant;
 	 * - Besoin d'accès par indice.
@@ -91,8 +89,8 @@ public class Schelling extends AutomateCellulaire {
 	 * @param k the k to set
 	 */
 	private void setK(int k) {
-		if (k>8){
-			throw new IllegalArgumentException("Le seuil de voisins ne peut pas être supérieur à 8.");
+		if (k>8|| k < 1){
+			throw new IllegalArgumentException("Le seuil de voisins doit être compris entre 1 et 8.");
 			//		return Color.red;
 		}
 		else {
@@ -111,13 +109,13 @@ public class Schelling extends AutomateCellulaire {
 	/**
 	 * @param nbCouleur the nbCouleur to set
 	 */
-	private void setNbCouleurs(int nbCouleur) {
+	private void setNbCouleurs(int nbCouleurs) {
 
-		if (nbCouleurs>9 && nbCouleur < 0){
-			throw new IllegalArgumentException("Le nombre de couleurs peut être de 9 au maximum");
+		if (nbCouleurs>9 || nbCouleurs < 1){
+			throw new IllegalArgumentException("Le nombre de couleurs doit être compris entre 1 et 9");
 		}
 		else {
-			this.nbCouleurs = nbCouleur;
+			this.nbCouleurs = nbCouleurs;
 		}
 	}
 

@@ -14,6 +14,8 @@ public class AutomateSimulator<Automate extends AutomateCellulaire> implements S
     protected  Automate notreAutomate;
     protected GUISimulator gui;
     
+    private int sizeCell;
+    
     /**
      * Constructeur
      * @param automate Automate variable en fonction du jeu choisi
@@ -22,6 +24,9 @@ public class AutomateSimulator<Automate extends AutomateCellulaire> implements S
     public AutomateSimulator(Automate automate, GUISimulator gui){
         this.notreAutomate = automate;
         this.gui = gui;
+        this.sizeCell=Math.min(gui.getPanelHeight(),gui.getPanelWidth())/
+    			Math.max(this.notreAutomate.getNbLignes(), this.notreAutomate.getNbColonnes());
+        System.out.println(""+this.sizeCell);
         this.drawAutomate();
     }
     
@@ -36,9 +41,9 @@ public class AutomateSimulator<Automate extends AutomateCellulaire> implements S
         		//on parcourt les Lignes de la grille
         		Cellule c = this.notreAutomate.getCellule(i,j);
         		gui.addGraphicalElement(
-	                    new Rectangle(((c.getXInt())*50)+25,((c.getYInt())*50)+25, 
+	                    new Rectangle(((c.getXInt())*this.sizeCell)+(this.sizeCell/2),((c.getYInt())*this.sizeCell)+(this.sizeCell/2), 
 	                            Color.black, c.getCouleur(), 
-	                            50, 50));
+	                            this.sizeCell, this.sizeCell));
         	}
         }
     }

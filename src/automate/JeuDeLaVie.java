@@ -7,9 +7,11 @@ public class JeuDeLaVie extends AutomateCellulaire{
 	
 	/**
 	 * Constructeur
+	 * @param nombre de lignes
+	 * @param nombre de colonnes
 	 */
-	public JeuDeLaVie (){
-		super();
+	public JeuDeLaVie (int nbLignes, int nbColonnes){
+		super(nbLignes,nbColonnes);
 		this.InitEtat();
 	}
 	

@@ -21,9 +21,11 @@ public class Immigration extends AutomateCellulaire {
 	/**
 	 * Constructeur
 	 * @param Le nombre d'état du jeu
+	 * @param Le nombre de lignes
+	 * @param Le nombre de colonnes
 	 */
-	public Immigration(int n){
-		super();
+	public Immigration(int n,int nbLignes,int nbColonnes){
+		super(nbLignes,nbColonnes);
 		this.setN(n);
 		this.InitEtat();
 	}
@@ -41,8 +43,8 @@ public class Immigration extends AutomateCellulaire {
 	 * @param nombre d'états du jeu
 	 */
 	public void setN(int n){
-		if (n>9){
-			throw new IllegalArgumentException("Le jeu ne peut contenir que 9 états au maximum");
+		if (n>9|| n < 1){
+			throw new IllegalArgumentException("Le jeu ne peut contenir que de 1 à 9 états");
 //			return Color.red;
 		}
 		else {
