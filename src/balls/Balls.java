@@ -4,7 +4,7 @@ import java.awt.Point;
 /**
  * Balls est la class qui permet de gérer des balles
  **
- * @author Claire et Mathieu
+ * @author Claire Mathieu Picardv
  *
  */
 public class Balls {
@@ -35,9 +35,22 @@ public class Balls {
      * @param dy Déplacement sur y
      */
     public void translate(int dx, int dy) {
-        for (Point ball:balls){
-            ball.translate(dx, dy);
-        }
+    	for (int i=0;i<balls.length;i++){
+    		if (this.balls[i].getX() < 700){
+    			this.balls[i].translate(dx, dy);	
+        	}
+        	else{
+        		this.balls[i].setLocation(0,this.balls[i].getY()+dy);	
+        	}
+        	if (this.balls[i].getY() < 600){
+        		this.balls[i].translate(dx, dy);	
+        	}
+        	else{
+        		this.balls[i].setLocation(this.balls[i].getX()+dx,0);	
+        	}
+        	System.out.println(""+this.balls[i].getLocation());
+    	}
+    	
     }
 
     /**

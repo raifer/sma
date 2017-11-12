@@ -1,7 +1,6 @@
 # Balls
 
 * Les balles doivent partir dans des dirrections différentes;
-* Elle doivent rebondirs sur les murs.
 
 # boids
 
