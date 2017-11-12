@@ -39,8 +39,14 @@ public class Flock {
 	}
 	
 	public Flock(int width, int height, int nb_boids) {
-this.width = width;
+		this(width,height,5,800,1);
+	}
+	
+	public Flock(int width, int height, int nb_boids, double fact, double coef) {
+		this.width = width;
 		this.height = height;
+		this.setCoefVelocity(coef);
+		this.setGroupFact(fact);
 		//Règle 1 : Déplacement vers le centre du groupe.
 		groupCenterFactor = 800;
 		// Règle 2 : Séparation entre les boids.
@@ -69,6 +75,14 @@ this.width = width;
 
 	public void setFood(Vector food) {
 		this.food = food;
+	}
+	
+	public void setGroupFact(double fact) {
+		this.groupCenterFactor=fact;
+	}
+	
+	public void setCoefVelocity(double coef) {
+		this.coefFiltreVelocity=coef;
 	}
 	
 	public void reInit() {
