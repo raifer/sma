@@ -2,7 +2,7 @@ package boids;
 
 import gui.GUISimulator;
 import gui.Simulable;
-import gui.Rectangle;
+import gui.Oval;
 import java.awt.Color;
 
 /**
@@ -39,7 +39,7 @@ public class FlockSimulator implements Simulable {
 		for (Boid boid : flock.getBoids()) {
 			Vector c = boid.getPosition();
 			gui.addGraphicalElement(
-					new Rectangle(
+					new Oval(
 							(int)c.getX(),
 							(int)c.getY(), 
 							Color.black, 
