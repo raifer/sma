@@ -1,6 +1,3 @@
-# Balls
-
-* Les balles doivent partir dans des dirrections différentes;
 
 # boids
 

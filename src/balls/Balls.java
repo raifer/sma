@@ -1,5 +1,6 @@
 package balls;
 import java.awt.Point;
+import java.util.Random;
 
 /**
  * Balls est la class qui permet de gérer des balles
@@ -9,46 +10,86 @@ import java.awt.Point;
  */
 public class Balls {
     private Point [] balls, ballsOri;
+    private int nbBalls;
+	private int dy[];
+	private int dx[];
+	
+	private Random randomGenerator;
 
     /**
-     * Créer 4 balles à des emplacement variés 
+     * Constructeur par défaut (créer 4 balles)
      */
     public Balls(){
-        this.balls = new Point[4];
-        this.ballsOri = new Point[4];
-
-        this.balls[0] = new Point(100,100);
-        this.balls[1] = new Point(400,400);
-        this.balls[2] = new Point(100,400);
-        this.balls[3] = new Point(400,100);
-
-        for(int i=0; i < balls.length; i++){
-            //this.ballsOri[i] = (Point)this.balls[i].clone();
+    	this(10);
+    }
+    public Balls(int nbBalls){
+    	this.randomGenerator = new Random();
+    	
+    	this.setNbBalls(nbBalls);
+    	this.setDxDy(nbBalls);
+    	
+        this.balls = new Point[this.getNbBalls()];
+        this.ballsOri = new Point[this.getNbBalls()];
+        
+        for(int i=0;i<this.getNbBalls();i++){
+        	System.out.println(""+i);
+	        this.balls[i] = new Point(325,325);
             this.ballsOri[i] = this.balls[i].getLocation();
         }
     }
 
-    /**
+   
+	public void setNbBalls(int nbBalls) {
+		if (nbBalls>10|| nbBalls < 1){
+			throw new IllegalArgumentException("On ne peut avoir qu'entre 1 et 10 balles");
+//			return Color.red;
+		}
+		else {
+			this.nbBalls=nbBalls;
+		}
+	}
+    
+    public int getNbBalls(){
+    	return this.nbBalls;
+    }
+    
+    private void setDxDy(int nbBalls) {
+    	this.dx = new int [nbBalls];
+    	this.dy = new int [nbBalls];
+    	
+    	for (int i=0;i<nbBalls;i++){
+			this.dx[i]=(randomGenerator.nextInt(nbBalls+1))-(nbBalls/2);
+			this.dy[i]=(randomGenerator.nextInt(nbBalls+1))-(nbBalls/2);
+    	}
+	}
+
+	/**
      * Déplacer toutes les balles
      ** 
      * @param dx Déplacement sur x
      * @param dy Déplacement sur y
      */
-    public void translate(int dx, int dy) {
-    	for (int i=0;i<balls.length;i++){
-    		if (this.balls[i].getX() < 700){
-    			this.balls[i].translate(dx, dy);	
+    public void translate() {
+    	for (int i=0;i<this.getNbBalls();i++){
+    		if (this.balls[i].getX() > 700) {
+        		this.balls[i].setLocation(0,this.balls[i].getY()+this.dy[i]);	
         	}
+    		else if (this.balls[i].getX() < 0){
+        		this.balls[i].setLocation(700,this.balls[i].getY()+this.dy[i]);
+    		}
         	else{
-        		this.balls[i].setLocation(0,this.balls[i].getY()+dy);	
+    			this.balls[i].translate(this.dx[i], this.dy[i]);
         	}
-        	if (this.balls[i].getY() < 600){
-        		this.balls[i].translate(dx, dy);	
+    		
+    		if (this.balls[i].getY() > 600) {
+        		this.balls[i].setLocation(this.balls[i].getX()+this.dx[i],0);	
         	}
+    		else if (this.balls[i].getY() < 0){
+        		this.balls[i].setLocation(this.balls[i].getX()+this.dx[i],600);
+    		}
         	else{
-        		this.balls[i].setLocation(this.balls[i].getX()+dx,0);	
+    			this.balls[i].translate(this.dx[i], this.dy[i]);
         	}
-        	System.out.println(""+this.balls[i].getLocation());
     	}
     	
     }
@@ -61,13 +102,6 @@ public class Balls {
         for(int i=0; i< this.getNbBalls(); i++){
             this.balls[i] = this.ballsOri[i].getLocation();
         }
-    }
-
-    /**
-     * @return
-     */
-    public int getNbBalls(){
-        return balls.length;
     }
 
     /**

@@ -1,3 +1,6 @@
+/**
+ * @author picardv
+ */
 package balls;
 import java.awt.Point;
 import gui.GUISimulator;
@@ -15,9 +18,9 @@ public class BallsSimulator implements Simulable {
      *** 
      * @param gui L'interface où va se dérouller la simulation
      */
-    public BallsSimulator(GUISimulator gui){
+    public BallsSimulator(GUISimulator gui, int nbBalls){
         this.gui = gui;
-        this.nosBalles = new Balls();
+        this.nosBalles = new Balls(nbBalls);
         this.drawBalls();
     }
 
@@ -28,13 +31,13 @@ public class BallsSimulator implements Simulable {
             gui.addGraphicalElement(
                     new Oval((int)ball.getX(), (int)ball.getY(),
                             Color.decode("#1f77b4"), Color.decode("#1f77b4"), 
-                            10, 10));
+                            25, 25));
         }
     }
 
     @Override
     public void next() {
-        nosBalles.translate(10, 10);
+        nosBalles.translate();
         this.drawBalls();
     }
 
