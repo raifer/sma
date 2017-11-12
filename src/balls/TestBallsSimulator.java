@@ -18,7 +18,7 @@ public class TestBallsSimulator {
     	int nbBalls = scN.nextInt();
 
     	System.out.println("");
-    	System.out.println("Vous avez choisi de voir "+ nbBalls +"balles s'annimer !");
+    	System.out.println("Vous avez choisi de voir "+ nbBalls +" balles s'annimer !");
     	
         GUISimulator gui = new GUISimulator(600, 700, Color.BLACK);
         gui.setSimulable(new BallsSimulator(gui,nbBalls));
