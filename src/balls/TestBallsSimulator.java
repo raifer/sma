@@ -1,6 +1,4 @@
-/**
- * @author picardv
- */
+
 
 package balls;
 import gui.GUISimulator;

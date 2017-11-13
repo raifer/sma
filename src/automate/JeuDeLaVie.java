@@ -1,8 +1,5 @@
 package automate;
-/**
- * @author picarv mathieu claire
- *
- */
+
 public class JeuDeLaVie extends AutomateCellulaire{
 	
 	/**

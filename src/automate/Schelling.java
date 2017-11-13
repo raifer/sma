@@ -3,10 +3,6 @@
  */
 package automate;
 
-/**
- * @author Mathieu picardv
- *
- */
 
 import java.util.LinkedList;
 import java.util.List;

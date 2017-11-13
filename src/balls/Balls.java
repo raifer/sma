@@ -2,12 +2,7 @@ package balls;
 import java.awt.Point;
 import java.util.Random;
 
-/**
- * Balls est la class qui permet de gérer des balles
- **
- * @author Claire Mathieu Picardv
- *
- */
+
 public class Balls {
     private Point [] balls, ballsOri;
     private int nbBalls;

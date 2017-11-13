@@ -1,7 +1,4 @@
-/**
- * @author picardv Mathieu Claire
- * 
- */
+
 package automate;
 import java.awt.Color;
 import java.awt.Point;

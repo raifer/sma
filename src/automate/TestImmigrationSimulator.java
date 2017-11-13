@@ -3,10 +3,6 @@ import java.awt.Color;
 import java.util.Scanner;
 
 import gui.GUISimulator;
-/**
- * @author picardv
- * 
- */
 
 public class TestImmigrationSimulator {
 

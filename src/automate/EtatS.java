@@ -5,10 +5,7 @@ package automate;
 
 import java.awt.Color;
 
-/**
- * @author mathieu
- *
- */
+
 
 /**
  * Enumération des états et de leurs couleurs pour l'automate cellulaire de Schelling.

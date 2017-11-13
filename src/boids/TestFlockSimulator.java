@@ -7,10 +7,7 @@ import java.awt.Color;
 
 import gui.GUISimulator;
 
-/**
- * @author Mathieu
- *
- */
+
 public class TestFlockSimulator {
 
 	/**

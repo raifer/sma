@@ -3,10 +3,7 @@
  */
 package boids;
 
-/**
- * @author Mathieu
- *
- */
+
 public class TestFlock {
 
 	/**

@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/** 
- * 
- * @author Mathieu
- *
- */
 public class Flock {
 	
 	/** Largeur et heuteur où va pouvoir évoluer le troupeau*/

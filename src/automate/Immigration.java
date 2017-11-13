@@ -1,10 +1,6 @@
 package automate;
 
-/**
- * 
- * @author PicardV
- *
- */
+
 
 public class Immigration extends AutomateCellulaire {
 
