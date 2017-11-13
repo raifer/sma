@@ -1,11 +1,6 @@
 package boids;
 
-/**
- * Chaque boids représente un membre de flock
- * 
- * @author Mathieu
- *
- */
+
 
 public class Boid {
 	/**

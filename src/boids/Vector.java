@@ -1,9 +1,5 @@
 package boids;
 
-/**
- * @author Mathieu
- *
- */
 public class Vector {
 	
     /**

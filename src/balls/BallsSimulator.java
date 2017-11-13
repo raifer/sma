@@ -1,6 +1,4 @@
-/**
- * @author picardv
- */
+
 package balls;
 import java.awt.Point;
 import gui.GUISimulator;

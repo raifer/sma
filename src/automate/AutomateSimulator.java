@@ -4,10 +4,6 @@ import gui.Simulable;
 import gui.Rectangle;
 import java.awt.Color;
 
-/**
- * @author Picardv Mathieu
- *
- */
 
 public class AutomateSimulator<Automate extends AutomateCellulaire> implements Simulable {
 

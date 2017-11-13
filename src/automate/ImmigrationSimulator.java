@@ -1,9 +1,6 @@
 package automate;
 import gui.GUISimulator;
-/**
- * @author Mathieu Picardv
- *
- */
+
 public class ImmigrationSimulator extends AutomateSimulator<Immigration> {
 
 	/**

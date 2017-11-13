@@ -2,14 +2,7 @@ package boids;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Used to generate a random name. Initially the nameBank is populated with the phonetic alphabet.
- * 
- * A list of used names is maintained to reduce repetition. However once all possibilities have been used this list is reset. 
- * 
- * @author Shaun
- *
- */
+
 public class RandomName {
 	private Random randomGenerator;
 	private ArrayList<Integer> usedList;

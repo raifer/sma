@@ -1,10 +1,6 @@
 package automate;
 import java.util.Random;
 
-/**
- * @author Mathieu Picardv
- *
- */
 
 public abstract class AutomateCellulaire {
 
