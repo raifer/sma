@@ -13,27 +13,28 @@ public class BallsSimulator implements Simulable {
 
     private Balls nosBalles;
     private GUISimulator gui;
-    private EventManager manager = new EventManager();
+    private EventManager manager;
     
     /**
      * Création des balles et placement de celles-ci dans la GUI
      *** 
      * @param gui L'interface où va se dérouller la simulation
      */
-    public BallsSimulator(GUISimulator gui, int nbBalls, EventManager manager){
-        this.gui = gui;
-        this.nosBalles = new Balls(nbBalls);
-        this.manager=manager;
+    protected BallsSimulator(GUISimulator gui, int nbBalls, EventManager manager){
+        this.setGui(gui);
+        this.setNosBalles(new Balls(nbBalls));
+        this.setManager(manager);//instancier premier evenement
+        this.manager.addEvent(new MajBalls(1,this));
         this.drawBalls();
     }
     
         
 
-    protected void drawBalls(){
-        gui.reset();
-        for (int i=0; i< this.nosBalles.getNbBalls(); i++){
-            Point ball = this.nosBalles.getBall(i);
-            gui.addGraphicalElement(
+    public void drawBalls(){
+        getGui().reset();
+        for (int i=0; i< this.getNosBalles().getNbBalls(); i++){
+            Point ball = this.getNosBalles().getBall(i);
+            getGui().addGraphicalElement(
                     new Oval((int)ball.getX(), (int)ball.getY(),
                             Color.decode("#1f77b4"), Color.decode("#1f77b4"), 
                             25, 25));
@@ -42,13 +43,48 @@ public class BallsSimulator implements Simulable {
 
     @Override
     public void next() {
-    	
-    	this.manager.next();
+    	this.getManager().next();
     }
 
     @Override
     public void restart() {
-        nosBalles.reInit();
+        getNosBalles().reInit();
         this.drawBalls();
     }
+
+
+
+	public GUISimulator getGui() {
+		return gui;
+	}
+
+
+
+	public void setGui(GUISimulator gui) {
+		this.gui = gui;
+	}
+
+
+
+	public Balls getNosBalles() {
+		return nosBalles;
+	}
+
+
+
+	public void setNosBalles(Balls nosBalles) {
+		this.nosBalles = nosBalles;
+	}
+
+
+
+	public EventManager getManager() {
+		return manager;
+	}
+
+
+
+	public void setManager(EventManager manager) {
+		this.manager = manager;
+	}
 }

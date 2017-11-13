@@ -3,36 +3,30 @@ import java.awt.Color;
 import java.awt.Point;
 
 import evenements.Event;
-import evenements.EventManager;
-import gui.GUISimulator;
 import gui.Oval;
 
 public class MajBalls extends Event {
 
-	Balls lesBalles;
-    private GUISimulator gui;
-    EventManager manager;
+	BallsSimulator BSim;
 	
-	public MajBalls(long d, Balls balles, GUISimulator gui, EventManager manager) {
+	public MajBalls(long d, BallsSimulator BSim) {
 		super(d);
-		this.lesBalles=balles;
-		this.gui=gui;
-		this.manager=manager;
+		this.BSim=BSim;
 	}
 	
 	@Override
 	public void execute() {
-		this.lesBalles.translate();
-		this.gui.reset();
-        for (int i=0; i< this.lesBalles.getNbBalls(); i++){
-            Point ball = this.lesBalles.getBall(i);
-            gui.addGraphicalElement(
+		this.BSim.getNosBalles().translate();
+		this.BSim.getGui().reset();
+        for (int i=0; i< this.BSim.getNosBalles().getNbBalls(); i++){
+            Point ball = this.BSim.getNosBalles().getBall(i);
+            this.BSim.getGui().addGraphicalElement(
                     new Oval((int)ball.getX(), (int)ball.getY(),
                             Color.decode("#1f77b4"), Color.decode("#1f77b4"), 
                             25, 25));
         }
         
-    	this.manager.addEvent(new MajBalls(this.manager.getCurrentDate()-1,this.lesBalles,this.gui, this.manager));
+    	this.BSim.getManager().addEvent(new MajBalls(this.BSim.getManager().getCurrentDate()+1,this.BSim));
 
 	}
 	}

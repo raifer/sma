@@ -20,7 +20,7 @@ public class TestBallsSimulator {
     	System.out.println("");
     	System.out.println("Vous avez choisi de voir "+ nbBalls +" balles s'annimer !");
     	
-    	EventManager manager = new EventManager();
+    	EventManager manager = new EventManager(0);
     	
         GUISimulator gui = new GUISimulator(600, 700, Color.BLACK);
         gui.setSimulable(new BallsSimulator(gui,nbBalls,manager));

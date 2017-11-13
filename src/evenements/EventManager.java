@@ -5,8 +5,18 @@ import java.util.Queue;
 
 public class EventManager {
 
+	/** **/
 	private long currentDate;
 	Queue<Event> EventQueue = new PriorityQueue<Event> ();
+	
+	public EventManager(long d) {
+		this.setCurrentDate(d);
+	}
+	
+	public EventManager(long d, Event e) {
+		this.setCurrentDate(d);
+		this.EventQueue.add(e);
+	}
 	
 	public long getCurrentDate() {
 		return this.currentDate;

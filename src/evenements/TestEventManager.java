@@ -4,7 +4,7 @@ public class TestEventManager {
 
 	public static void main(String[] args) {
 
-		EventManager manager = new EventManager();
+		EventManager manager = new EventManager(0);
 		
 		
 		for (int i = 2; i<= 10; i+=2) {
