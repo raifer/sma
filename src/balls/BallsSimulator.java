@@ -1,26 +1,33 @@
 
 package balls;
 import java.awt.Point;
+
+import evenements.EventManager;
 import gui.GUISimulator;
 import gui.Simulable;
 import gui.Oval;
 import java.awt.Color;
 
+
 public class BallsSimulator implements Simulable {
 
     private Balls nosBalles;
     private GUISimulator gui;
-
+    private EventManager manager = new EventManager();
+    
     /**
      * Création des balles et placement de celles-ci dans la GUI
      *** 
      * @param gui L'interface où va se dérouller la simulation
      */
-    public BallsSimulator(GUISimulator gui, int nbBalls){
+    public BallsSimulator(GUISimulator gui, int nbBalls, EventManager manager){
         this.gui = gui;
         this.nosBalles = new Balls(nbBalls);
+        this.manager=manager;
         this.drawBalls();
     }
+    
+        
 
     protected void drawBalls(){
         gui.reset();
@@ -35,8 +42,8 @@ public class BallsSimulator implements Simulable {
 
     @Override
     public void next() {
-        nosBalles.translate();
-        this.drawBalls();
+    	
+    	this.manager.next();
     }
 
     @Override

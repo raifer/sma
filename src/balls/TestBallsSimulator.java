@@ -5,6 +5,8 @@ import gui.GUISimulator;
 import java.awt.Color;
 import java.util.Scanner;
 
+import evenements.EventManager;
+
 public class TestBallsSimulator {
 
 	private static Scanner scN;
@@ -18,8 +20,10 @@ public class TestBallsSimulator {
     	System.out.println("");
     	System.out.println("Vous avez choisi de voir "+ nbBalls +" balles s'annimer !");
     	
+    	EventManager manager = new EventManager();
+    	
         GUISimulator gui = new GUISimulator(600, 700, Color.BLACK);
-        gui.setSimulable(new BallsSimulator(gui,nbBalls));
+        gui.setSimulable(new BallsSimulator(gui,nbBalls,manager));
     }
 
 }
