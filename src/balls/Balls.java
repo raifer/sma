@@ -3,31 +3,35 @@ import java.awt.Point;
 import java.util.Random;
 
 
+/**
+ * @author raifer
+ *
+ */
 public class Balls {
     private Point [] balls, ballsOri;
     private int nbBalls;
 	private int dy[];
 	private int dx[];
+	private final int vitesseMax = 40;
 	
 	private Random randomGenerator;
 
     /**
-     * Constructeur par défaut (créer 4 balles)
+     * Constructeur par défaut (créer 10 balles)
      */
     public Balls(){
     	this(10);
     }
+    
     public Balls(int nbBalls){
     	this.randomGenerator = new Random();
-    	
     	this.setNbBalls(nbBalls);
-    	this.setDxDy(nbBalls);
+    	this.generateDxDy();
     	
         this.balls = new Point[this.getNbBalls()];
         this.ballsOri = new Point[this.getNbBalls()];
         
         for(int i=0;i<this.getNbBalls();i++){
-        	System.out.println(""+i);
 	        this.balls[i] = new Point(325,325);
             this.ballsOri[i] = this.balls[i].getLocation();
         }
@@ -48,13 +52,17 @@ public class Balls {
     	return this.nbBalls;
     }
     
-    private void setDxDy(int nbBalls) {
-    	this.dx = new int [nbBalls];
-    	this.dy = new int [nbBalls];
+    /**
+     * Créer le tableau dx et dy et le complette 
+     * en générant une vitesse et direction aléatoire pour chaque balles.
+     */
+    private void generateDxDy() {
+    	this.dx = new int [this.getNbBalls()];
+    	this.dy = new int [this.getNbBalls()];
     	
     	for (int i=0;i<nbBalls;i++){
-			this.dx[i]=(randomGenerator.nextInt(nbBalls+1))-(nbBalls/2);
-			this.dy[i]=(randomGenerator.nextInt(nbBalls+1))-(nbBalls/2);
+			this.dx[i]=randomGenerator.nextInt(this.vitesseMax+1)-this.vitesseMax/2;
+			this.dy[i]=randomGenerator.nextInt(this.vitesseMax+1)-this.vitesseMax/2;
     	}
 	}
 
@@ -66,25 +74,25 @@ public class Balls {
      */
     public void translate() {
     	for (int i=0;i<this.getNbBalls();i++){
-    		if (this.balls[i].getX() > 700) {
-        		this.balls[i].setLocation(0,this.balls[i].getY()+this.dy[i]);	
-        	}
-    		else if (this.balls[i].getX() < 0){
-        		this.balls[i].setLocation(700,this.balls[i].getY()+this.dy[i]);
+    		double  x = this.balls[i].getX();
+    		double  y = this.balls[i].getY();
+    		if ( x > 700) {
+    			x = 1400 - x;
+    			dx[i] = -dx[i];
+        	} else if (x < 0){
+    			x = -x;
+    			dx[i] = -dx[i];
     		}
-        	else{
-    			this.balls[i].translate(this.dx[i], this.dy[i]);
-        	}
+    		if (y > 600) {
+        		y = 1200 -y;
+        		dy[i] = -dy[i];
+        	} else if (y < 0){
+        		y = -y;
+        		dy[i] = -dy[i];
+    		}
     		
-    		if (this.balls[i].getY() > 600) {
-        		this.balls[i].setLocation(this.balls[i].getX()+this.dx[i],0);	
-        	}
-    		else if (this.balls[i].getY() < 0){
-        		this.balls[i].setLocation(this.balls[i].getX()+this.dx[i],600);
-    		}
-        	else{
+    		this.balls[i].setLocation(x, y);
     			this.balls[i].translate(this.dx[i], this.dy[i]);
-        	}
     	}
     	
     }
