@@ -1,7 +1,11 @@
-package boids;
+
 
 abstract class Event {
 	private long date;
+	
+	public Event(long d) {
+		this.setDate(d);
+	}
 	
 	public long getDate() {
 		return this.date;

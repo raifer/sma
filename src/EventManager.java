@@ -1,4 +1,4 @@
-package boids;
+
 
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -20,9 +20,11 @@ public class EventManager {
 	}
 	
 	public void next() {
-		this.setCurrentDate(this.getCurrentDate()+5);
-		while (!this.isFinished()){
-			this.EventQueue.remove().execute();
+		Event currEvent = this.EventQueue.remove();
+		this.setCurrentDate(this.getCurrentDate()+1);
+		while (currEvent.getDate()<=this.currentDate){
+			currEvent.execute();
+			currEvent = this.EventQueue.remove();
 		}
 	}
 	
@@ -30,7 +32,8 @@ public class EventManager {
 		if(this.EventQueue.isEmpty()) {
 			return true;
 		}
-		else return false;
+		else 
+			return false;
 	}
 	
 	public void restart() {
