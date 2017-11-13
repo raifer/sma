@@ -5,26 +5,31 @@ import gui.Simulable;
 import gui.Oval;
 import java.awt.Color;
 
+import evenements.EventManager;
+
 
 
 public class FlockSimulator implements Simulable {
 	private Flock flock;
 
 	protected GUISimulator gui;
+	private EventManager manager;
 
 	private int height;
 	private int width;
 	
-	public FlockSimulator(GUISimulator gui){
-		this(gui, 20);
+	public FlockSimulator(GUISimulator gui, EventManager manager){
+		this(gui, 20, manager);
 	}
 	
-		public FlockSimulator(GUISimulator gui, int nb_boids){
+		public FlockSimulator(GUISimulator gui, int nb_boids, EventManager manager){
 		this.gui = gui;
 		 this.height = gui.getPanelHeight() - 200;
 		this.width = gui.getPanelWidth() - 100;
-		this.flock = new Flock(this.width, this.height, nb_boids);
+		this.setFlock(new Flock(this.width, this.height, nb_boids));
 		this.drawFlock();
+		this.setManager(manager);
+		this.getManager().addEvent(new MajFlock(1,this));
 	}
 
 	/**
@@ -33,7 +38,7 @@ public class FlockSimulator implements Simulable {
 	protected void drawFlock(){
 		gui.reset();
 		// Il faut désinner quelques chose et qu'il soit orientable.
-		for (Boid boid : flock.getBoids()) {
+		for (Boid boid : getFlock().getBoids()) {
 			Vector c = boid.getPosition();
 			gui.addGraphicalElement(
 					new Oval(
@@ -52,8 +57,7 @@ public class FlockSimulator implements Simulable {
 	 */
 	@Override
 	public void next() {
-		this.flock.updateBoidsPostion();
-		this.drawFlock();
+		this.getManager().next();
 	}
 
 	/**
@@ -62,8 +66,24 @@ public class FlockSimulator implements Simulable {
 	 */
 	@Override
 	public void restart() {
-		this.flock.reInit();
+		this.getFlock().reInit();
 		this.drawFlock();
+	}
+
+	public EventManager getManager() {
+		return manager;
+	}
+
+	public void setManager(EventManager manager) {
+		this.manager = manager;
+	}
+
+	public Flock getFlock() {
+		return flock;
+	}
+
+	public void setFlock(Flock flock) {
+		this.flock = flock;
 	}
 }
 
