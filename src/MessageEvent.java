@@ -10,4 +10,9 @@ public class MessageEvent extends Event {
 	public void execute() {
 		System.out.println(this.getDate() + this.message);
 	}
+
+	@Override
+	public int compareTo(Event e) {
+		return super.compareTo(e);
+	}
 }

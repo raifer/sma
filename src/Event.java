@@ -1,6 +1,6 @@
 
 
-abstract class Event {
+abstract class Event implements Comparable<Event> {
 	private long date;
 	
 	public Event(long d) {

@@ -20,12 +20,14 @@ public class EventManager {
 	}
 	
 	public void next() {
+		//
 		Event currEvent = this.EventQueue.remove();
 		this.setCurrentDate(this.getCurrentDate()+1);
 		while (currEvent.getDate()<=this.currentDate){
 			currEvent.execute();
 			currEvent = this.EventQueue.remove();
 		}
+		this.addEvent(currEvent);
 	}
 	
 	public boolean isFinished() {
