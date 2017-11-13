@@ -5,14 +5,17 @@ public class TestEventManager {
 
 		EventManager manager = new EventManager();
 		
-		Event e1 = new MessageEvent(1,"hello");
-		Event e2 = new MessageEvent(2, "hola");
 		
-		if(e1<e2) {
-			System.out.println("1<2");
+		for (int i = 2; i<= 10; i+=2) {
+			manager.addEvent(new MessageEvent(i, "[PING]"));
 		}
-		else 
-			System.out.println("2<1");
+		for (int i = 3; i<= 9; i+=3) {
+			manager.addEvent(new MessageEvent(i, "[PONG]"));
+		}
+		
+		while (!manager.isFinished()) {
+			manager.next();
+		}
 	}
 
 }
