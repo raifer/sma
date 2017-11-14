@@ -5,7 +5,7 @@ Ensimag 2A POO - TP 2015/16
   -> TestGUI.java : cree une fenetre graphique "Invaders", pas de simulation
   Et toutes les classes crées pour le projet
 
-- bin/gui.jar: archive Java contenant les classes de l'interface graphique. Voir un exemple d'utilisation dans TestGUI.java
+- prof/gui.jar: archive Java contenant les classes de l'interface graphique. Voir un exemple d'utilisation dans TestGUI.java
 
 - doc_gui: la documentation (API) des classes de l'interface graphique contenues dans gui.jar. Point d'entrée: index.html
 
