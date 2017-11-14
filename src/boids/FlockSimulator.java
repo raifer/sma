@@ -3,11 +3,16 @@ package boids;
 import gui.GUISimulator;
 import gui.Simulable;
 import gui.Oval;
+import gui.Rectangle;
+
 import java.awt.Color;
 
 import evenements.EventManager;
 
-
+/**
+ * Simule un Flock
+ *
+ */
 
 public class FlockSimulator implements Simulable {
 	protected Flock flock;
@@ -63,7 +68,15 @@ public class FlockSimulator implements Simulable {
 							50));
 		}
 	}
-
+	
+	/**
+	 *Dessine la nourriture
+	 */
+	protected void drawFood() {
+		gui.addGraphicalElement(new Rectangle(500, 100, Color.green, Color.black, 5, 5));
+	}
+	
+	
 	/**
 	 * Mise à jour des boids après un pas
 	 * puis affichage
@@ -71,6 +84,8 @@ public class FlockSimulator implements Simulable {
 	@Override
 	public void next() {
 		this.manager.next();
+		this.drawFlock();
+		this.drawFood();
 	}
 
 	/**
@@ -81,6 +96,7 @@ public class FlockSimulator implements Simulable {
 	public void restart() {
 		this.flock.reInit();
 		this.drawFlock();
+	
 	}
 
 }

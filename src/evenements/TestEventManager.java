@@ -1,5 +1,11 @@
 package evenements;
 
+/**
+ * Classe de Test pour vérifier le fonctionnement
+ * des classes Event et EventManager
+ * grâce à l'Event MessageEvent
+ */
+
 public class TestEventManager {
 
 	public static void main(String[] args) {

@@ -2,6 +2,10 @@ package boids;
 
 import evenements.Event;
 
+/**
+ * Evenement de mise à jour des positions des boids d'un Flock
+ */
+
 public class MajFlock extends Event {
 
 	FlockSimulator FlockSim;
@@ -24,7 +28,6 @@ public class MajFlock extends Event {
 	public void execute() {
 		
 		this.FlockSim.flock.updateBoidsPostion();
-		this.FlockSim.drawFlock();
 		this.FlockSim.manager.addEvent(new MajFlock(this.FlockSim.manager.getCurrentDate()+1,this.FlockSim));
 		
 	}

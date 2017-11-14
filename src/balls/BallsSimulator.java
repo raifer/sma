@@ -7,7 +7,10 @@ import gui.GUISimulator;
 import gui.Simulable;
 import gui.Oval;
 import java.awt.Color;
-
+/**
+ * Simule les balles
+ *
+ */
 
 public class BallsSimulator implements Simulable {
 
@@ -50,6 +53,7 @@ public class BallsSimulator implements Simulable {
     @Override
     public void next() {
     	this.getManager().next();
+		this.drawBalls(); 
     }
 
     @Override

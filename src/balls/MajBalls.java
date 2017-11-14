@@ -1,6 +1,10 @@
 package balls;
 import evenements.Event;
 
+/**
+ * Evenement de mise à jour de la position des balles 
+ */
+
 public class MajBalls extends Event {
 
 	BallsSimulator BSim;
@@ -21,8 +25,7 @@ public class MajBalls extends Event {
 	 */
 	@Override
 	public void execute() {
-		this.BSim.getNosBalles().translate();
-		this.BSim.drawBalls();        
+		this.BSim.getNosBalles().translate();       
     	this.BSim.getManager().addEvent(new MajBalls(this.BSim.getManager().getCurrentDate()+1,this.BSim));
 
 	}

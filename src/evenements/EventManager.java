@@ -3,6 +3,11 @@ package evenements;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * Gestionnaire d'évènement utilisé dans balls, boids et evenements
+ *
+ */
+
 public class EventManager {
 
 	/** Date courrante du manager */

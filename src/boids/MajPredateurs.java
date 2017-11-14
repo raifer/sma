@@ -2,6 +2,12 @@ package boids;
 
 import evenements.Event;
 
+/**
+ * Evenement de mise à jour des positions des boids du flock de prédateurs
+ * avec ajout à la volée tous les 2 pas de temps
+ *
+ */
+
 public class MajPredateurs extends Event {
 
 	PredateursProiesSimulator PPSim;
@@ -24,7 +30,6 @@ public class MajPredateurs extends Event {
 	public void execute() {
 
 		this.PPSim.predateurs.updateBoidsPostion();
-		this.PPSim.drawFlock();
 		this.PPSim.manager.addEvent(new MajPredateurs(this.PPSim.manager.getCurrentDate()+2,this.PPSim));
 		
 	}
