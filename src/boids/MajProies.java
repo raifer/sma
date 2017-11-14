@@ -32,7 +32,6 @@ public class MajProies extends Event {
 	public void execute() {
 
 		this.PPSim.proies.updateBoidsPostion();
-		this.PPSim.drawFlock();
 		this.PPSim.manager.addEvent(new MajProies(this.PPSim.manager.getCurrentDate()+1,this.PPSim));
 		
 	}

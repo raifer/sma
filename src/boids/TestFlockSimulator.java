@@ -21,7 +21,7 @@ public class TestFlockSimulator {
 		int nb_boids = 3;
     	EventManager manager = new EventManager(0);
 		GUISimulator gui = new GUISimulator(width, height, Color.BLACK);
-		FlockSimulator flockSimu = new FlockSimulator(gui,nb_boids,manager);
+		FlockSimulator flockSimu = new FlockSimulator(gui, nb_boids, manager);
         gui.setSimulable(flockSimu);
 
 	}

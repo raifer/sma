@@ -3,6 +3,8 @@ package boids;
 import gui.GUISimulator;
 import gui.Simulable;
 import gui.Oval;
+import gui.Rectangle;
+
 import java.awt.Color;
 
 import evenements.EventManager;
@@ -82,6 +84,14 @@ public class PredateursProiesSimulator implements Simulable {
 							30));
 		}
 	}
+	
+	/**
+	 *Dessine la nourriture
+	 */
+	protected void drawFood() {
+		gui.addGraphicalElement(new Rectangle(500, 100, Color.green, Color.black, 5, 5));
+	}
+	
 	/**
 	 * Mise à jour des boids après un pas
 	 * puis affichage
@@ -89,6 +99,8 @@ public class PredateursProiesSimulator implements Simulable {
 	@Override
 	public void next() {
 		this.manager.next();
+		this.drawFlock();
+		this.drawFood();
 	}
 
 	/**
