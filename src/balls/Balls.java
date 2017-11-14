@@ -73,9 +73,13 @@ public class Balls {
      */
     public void translate() {
     	for (int i=0;i<this.getNbBalls();i++){
+    		// Déplacement de la balle
+    		this.balls[i].translate(this.dx[i], this.dy[i]);
+    		
     		double  x = this.balls[i].getX();
     		double  y = this.balls[i].getY();
-    		if ( x > 700) {
+    		// On regarde si on a touché une bordure.
+    		if ( x > 700) {					
     			x = 1400 - x;
     			dx[i] = -dx[i];
         	} else if (x < 0){
@@ -91,7 +95,7 @@ public class Balls {
     		}
     		
     		this.balls[i].setLocation(x, y);
-    			this.balls[i].translate(this.dx[i], this.dy[i]);
+    			
     	}
     	
     }
