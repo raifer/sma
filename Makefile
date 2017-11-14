@@ -12,6 +12,7 @@
 #     Les classes du package par defaut sont dans src
 #
 #  2) Les bytecodes (*.class) se trouvent dans le repertoire bin
+# 3. gui.jar est dans le dossier prof 
 #     La hierarchie des sources (par package) est conservee.
 #     Pour un package (ici gui.jar), il est aussi dans bin.
 #
@@ -21,23 +22,47 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testGUI 
+balls:
+	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/balls/TestBallsSimulator.java
 
-testGUI:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestGUI.java
+runBalls: balls
+	java -cp "prof/gui.jar:bin/" balls.TestBallsSimulator
 
 
+jdlv:
+	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/automate/TestJDLVSimulator.java
+
+runJdlv : jdlv
+	java -cp "prof/gui.jar:bin/" automate.TestJDLVSimulator
+	
+
+testImmigration:
+	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/automate/TestImmigrationSimulator.java
+testSchelling:
+	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/automate/TestSchellingSimulator.java
+testFlockSimulator:
+	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/boids/TestFlockSimulator.java
+
+testPPSimulator:
+	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/boids/TestPPSimulator.java
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin TestGUI
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeIHM
-exeGUI:
-	java -classpath bin:bin/gui.jar TestGUI
+exeBalls:
+	java -classpath bin/balls/:binProf/gui.jar TestBallsSimulator
 
-javadoc:
-	javadoc -encoding utf8 -docencoding utf8 -charset utf8 -d javadoc src/*java
-
+exeJDLV:
+	java -classpath bin:binProf/gui.jar TestJDLVSimulator
+exeImmigration:
+	java -classpath bin:binProf/gui.jar TestImmigrationSimulator
+exeSchelling:
+	java -classpath bin:binProf/gui.jar TestSchellingSimulator
+exeFlockSimulator:
+	java -classpath bin:binProf/gui.jar TestFlockSimulator
+exePPSimulator:
+	java -classpath bin:binProf/gui.jar TestPPSimulator
 clean:
 	rm -rf bin/*.class
 
