@@ -35,6 +35,26 @@ jdlv:
 runJdlv : jdlv
 	java -cp "prof/gui.jar:bin/" automate.TestJDLVSimulator
 	
+immigration:
+	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/automate/TestImmigrationSimulator.java
+
+runImmigration : immigration
+	java -cp "prof/gui.jar:bin/" automate.TestImmigrationSimulator
+	
+schelling : javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/automate/TestSchellingSimulator.java
+
+runSchelling : schelling
+	java -cp "prof/gui.jar:bin/" automate.TestSchellingSimulator
+	
+flock : javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/boids/FlockSimulator.java
+
+runFlock : flock
+	java -cp "prof/gui.jar:bin/" boids.FlockSimulator
+	
+pp : javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/boids/PredateursProieSimulator.java
+
+runPP : pp
+	java -cp "prof/gui.jar:bin/" boids.PredateursProiesSimulator
 
 testImmigration:
 	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/automate/TestImmigrationSimulator.java
