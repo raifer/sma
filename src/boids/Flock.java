@@ -14,33 +14,55 @@ public class Flock {
 	/** Sauvegarde de la liste des boids pour la remise à zéro */
 	private List<Boid> boidsOri = new ArrayList<Boid>();
 	
-	// Paramètre du Flock
+	/** Paramètre du Flock */
 	private double coefFiltreVelocity = 1;
 		
-	//Règle 1 : Déplacement vers le centre du groupe.
+	/**Règle 1 : Déplacement vers le centre du groupe.*/
 	private double groupCenterFactor = 800;
-	// Règle 2 : Séparation entre les boids.
+	/** Règle 2 : Séparation entre les boids.*/
 	private int seperationDistance = 80;
 	private double seperationFactor = 20;
-	//Règle 4 : Evite le bord de la fenêtre de simulation
+	/**Règle 4 : Evite le bord de la fenêtre de simulation*/
 	private int boundingDistance = 80;
 	private double boundingFactor = 20;
-	// Règle 5 : Attraction vers la nourriture
+	/** Règle 5 : Attraction vers la nourriture*/
 	private double attractionFactor = 2000;
 	private Vector food = new Vector(100, 100);
 	
+	
+	/**
+	 * Constructeur par défaut avec 5 boids
+	 * @param width
+	 * @param height
+	 */
 	public Flock(int width, int height) {
 		this(width, height, 5);
 	}
 	
+	/**
+	 * Constructeur avec choix de largeur, hauteur et nombre de boids
+	 * Coefficient de groupe par défaut réglé à 800
+	 * 
+	 * @param width
+	 * @param height
+	 * @param nb_boids
+	 */
 	public Flock(int width, int height, int nb_boids) {
-		this(width,height,5,800,1);
+		this(width,height,5,800);
 	}
 	
-	public Flock(int width, int height, int nb_boids, double fact, double coef) {
+	/**
+	 * Constructeur avec choix de la largeur et hauteur de l'environnement,
+	 * du nombre de boids et du coefficient GroupFact
+	 * 
+	 * @param width
+	 * @param height
+	 * @param nb_boids
+	 * @param fact
+	 */
+	public Flock(int width, int height, int nb_boids, double fact) {
 		this.width = width;
 		this.height = height;
-		this.setCoefVelocity(coef);
 		this.setGroupFact(fact);
 		//Règle 1 : Déplacement vers le centre du groupe.
 		groupCenterFactor = 800;
@@ -51,23 +73,22 @@ public class Flock {
 		boundingDistance = 80;
 		boundingFactor = 20;
 		// Règle 5 : Attraction vers la nourriture
-		attractionFactor = 20;
-		food = new Vector(500, 0);
+		setAttractionFactor(20);
+		food = new Vector(500, 100);
 		
 		//Random numbers scatters boids start positions
 		Random randNum = new Random();
 		RandomName randName = new RandomName();
 
 		for(int i = 0; i < nb_boids; i++) {
-			// Je ne comprend pas le +1 qui était là
 			int  x = randNum.nextInt(this.width) + 1;
 			int  y = randNum.nextInt(this.height) + 1;
 
 			boids.add(new Boid(x,y, randName.getName() ));
 			boidsOri.add(new Boid(x,y, randName.getName() ));
 		}
-	} // end constructor
-
+	}
+	
 	public void setFood(Vector food) {
 		this.food = food;
 	}
@@ -108,7 +129,7 @@ public class Flock {
 			// Collision avoidance
 			sum = sum.add(v2);
 			// Match Flock Velocity
-//			sum = sum.add(v3);
+		//	sum = sum.add(v3);
 			// Bouding Avoidance
 			sum = sum.add(v4);
 			 // Food attraction
@@ -249,7 +270,7 @@ public class Flock {
 		if (tend.getX() < -max) tend.setX(-max);;
 		if (tend.getY() > max) tend.setY(max);;
 		if (tend.getY() < -max) tend.setY(-max);;
-		tend = tend.division(this.attractionFactor);
+		tend = tend.division(this.getAttractionFactor());
 		return tend;
 	}
 	
@@ -260,6 +281,14 @@ public class Flock {
 			s += "\n";
 		}
 		return s;
+	}
+
+	public double getAttractionFactor() {
+		return attractionFactor;
+	}
+
+	public void setAttractionFactor(double attractionFactor) {
+		this.attractionFactor = attractionFactor;
 	}
 	
 }

@@ -5,14 +5,26 @@ import java.util.Queue;
 
 public class EventManager {
 
-	/** **/
+	/** Date courrante du manager */
 	private long currentDate;
+	
+	/** File des évènements triée par priorité = par date*/
 	Queue<Event> EventQueue = new PriorityQueue<Event> ();
 	
+	
+	/**
+	 * Constructeur du manager par défaut sans évènements
+	 * @param d
+	 */
 	public EventManager(long d) {
 		this.setCurrentDate(d);
 	}
 	
+	/**
+	 * Constructeur de manager 
+	 * @param d la date courrante du manager
+	 * @param e un évènement à ajouter à l'EventQueue
+	 */
 	public EventManager(long d, Event e) {
 		this.setCurrentDate(d);
 		this.EventQueue.add(e);
@@ -25,10 +37,20 @@ public class EventManager {
 		this.currentDate=d;
 	}
 	
+	/**
+	 * Ajoute un évènement à l'EventQueue
+	 * 
+	 * @param e évènement à ajouté
+	 */
 	public void addEvent(Event e) {
 		this.EventQueue.add(e);
 	}
 	
+	/**
+	 * Incrémente la date courante du manager
+	 * de 1 et réalise les évènements de l'EventQueue 
+	 * jusqu'à cette nouvelle date courante
+	 */
 	public void next() {
 		//
 		Event currEvent = this.EventQueue.remove();
@@ -40,6 +62,11 @@ public class EventManager {
 		this.addEvent(currEvent);
 	}
 	
+	/**
+	 * 
+	 * @return true si il n'y a plus d'évènements
+	 * à traiter
+	 */
 	public boolean isFinished() {
 		if(this.EventQueue.isEmpty()) {
 			return true;
@@ -48,6 +75,9 @@ public class EventManager {
 			return false;
 	}
 	
+	/**
+	 * Réinitialise le manager à la date 0
+	 */
 	public void restart() {
 		this.setCurrentDate(0);
 	}

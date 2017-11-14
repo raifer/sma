@@ -36,6 +36,9 @@ public abstract class Event implements Comparable<Event> {
 	public abstract void execute();
 	
 	/**
+	 * Implément la relation d'ordre entre les évènements
+	 * en fonction de leur date
+	 * 
 	 * (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */

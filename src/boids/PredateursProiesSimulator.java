@@ -28,12 +28,20 @@ public class PredateursProiesSimulator implements Simulable {
 		this(gui, 3, 20, manager);
 	}
 	
-
+	/**
+	 * Constructeur avec choix du nombre de proies et de prédateurs
+	 * 
+	 * @param gui
+	 * @param nb_pred
+	 * @param nb_proies
+	 * @param manager
+	 */
 	public PredateursProiesSimulator(GUISimulator gui, int nb_pred, int nb_proies, EventManager manager) {
 		this.gui = gui;
 		this.height = gui.getPanelHeight() - 200;
 		this.width = gui.getPanelWidth() - 100;
-		this.predateurs = new Flock(this.width, this.height, nb_pred, 100, 2);
+		this.predateurs = new Flock(this.width, this.height, nb_pred, 100);
+		this.predateurs.setAttractionFactor(4000);
 		this.proies = new Flock(this.width, this.height, nb_proies);
 		this.drawFlock();
 		this.manager = manager;
@@ -41,9 +49,11 @@ public class PredateursProiesSimulator implements Simulable {
 		this.manager.addEvent(new MajProies(1, this));
 	}
 	
+	/**
+	 * Dessine les deux flocks
+	 */
 	protected void drawFlock(){
 		gui.reset();
-		// Il faut désinner quelques chose et qu'il soit orientable.
 		for (Boid boid : predateurs.getBoids()) {
 			Vector c = boid.getPosition();
 			gui.addGraphicalElement(
