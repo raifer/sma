@@ -1,5 +1,9 @@
 package automate;
 
+/**
+ * Automate cellulaire du jeux de la vie
+ *
+ */
 public class JeuDeLaVie extends AutomateCellulaire{
 	
 	/**

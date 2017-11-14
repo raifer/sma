@@ -5,6 +5,10 @@ import java.util.Scanner;
 import gui.GUISimulator;
 
 
+/**
+ * Permet de tester la simulation de l'automate du jeux de la vie.
+ *
+ */
 public class TestJDLVSimulator {
 	private static Scanner scL;
 	private static Scanner scC;

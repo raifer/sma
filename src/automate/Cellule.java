@@ -3,6 +3,10 @@ package automate;
 import java.awt.Color;
 import java.awt.Point;
 
+/**
+ * Une cellule d'un automate cellulaire avec un état sous forme d'entier
+ *
+ */
 @SuppressWarnings("serial")
 public class Cellule extends Point {
 

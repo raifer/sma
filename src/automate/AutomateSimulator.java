@@ -5,6 +5,11 @@ import gui.Rectangle;
 import java.awt.Color;
 
 
+/**
+ * Classe mère pour simuller les trois automate.
+ *
+ * @param <Automate>
+ */
 public class AutomateSimulator<Automate extends AutomateCellulaire> implements Simulable {
 
     protected  Automate notreAutomate;

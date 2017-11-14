@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import gui.GUISimulator;
 
+/**
+ * Teste de l'automate Immigration.
+ *
+ */
 public class TestImmigrationSimulator {
 
 	private static Scanner scL;

@@ -1,6 +1,10 @@
 package automate;
 import gui.GUISimulator;
 
+/**
+ * Cette classe permet de simuller l'automate Immigration.
+ *
+ */
 public class ImmigrationSimulator extends AutomateSimulator<Immigration> {
 
 	/**

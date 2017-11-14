@@ -1,6 +1,10 @@
 package automate;
 import gui.GUISimulator;
 
+/**
+ * Classe qui permet la simulation de l'automate Jeux de la vie
+ *
+ */
 public class JeuDeLaVieSimulator extends AutomateSimulator<JeuDeLaVie> {
 
 	/**

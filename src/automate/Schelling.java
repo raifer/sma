@@ -8,6 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+/**
+ * Automate cellulaire pour étudier la ségrégation
+ *
+ */
 public class Schelling extends AutomateCellulaire {
 
 	/** 

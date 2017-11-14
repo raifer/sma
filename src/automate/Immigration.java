@@ -2,6 +2,10 @@ package automate;
 
 
 
+/**
+ * Automate cellulaire pour l'imigration 
+ *
+ */
 public class Immigration extends AutomateCellulaire {
 
 	private int n ; // Nombre d'états

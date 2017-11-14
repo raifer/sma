@@ -2,6 +2,10 @@ package automate;
 import java.util.Random;
 
 
+/**
+ * 
+ * La classe mère pour les trois automates
+ */
 public abstract class AutomateCellulaire {
 
 	private int nbLignes;

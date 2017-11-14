@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import gui.GUISimulator;
 
+/**
+ * Permet de tester l'automate cellulaire de Schelling
+ *
+ */
 public class TestSchellingSimulator {
 
 

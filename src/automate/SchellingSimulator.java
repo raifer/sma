@@ -1,6 +1,10 @@
 package automate;
 import gui.GUISimulator;
 
+/**
+ * Classe qui permet la simulation de l'automate de Schelling
+ *
+ */
 public class SchellingSimulator extends AutomateSimulator<Schelling> {
 
 	/**
