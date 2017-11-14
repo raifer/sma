@@ -7,7 +7,10 @@ import java.awt.Color;
 
 import evenements.EventManager;
 
-
+/**
+ * Simule un Flock
+ *
+ */
 
 public class FlockSimulator implements Simulable {
 	protected Flock flock;
@@ -71,6 +74,7 @@ public class FlockSimulator implements Simulable {
 	@Override
 	public void next() {
 		this.manager.next();
+		this.drawFlock();
 	}
 
 	/**

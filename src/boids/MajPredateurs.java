@@ -2,6 +2,12 @@ package boids;
 
 import evenements.Event;
 
+/**
+ * Evenement de mise à jour des positions des boids du flock de prédateurs
+ * avec ajout à la volée tous les 2 pas de temps
+ *
+ */
+
 public class MajPredateurs extends Event {
 
 	PredateursProiesSimulator PPSim;

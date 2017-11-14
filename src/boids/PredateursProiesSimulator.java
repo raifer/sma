@@ -7,6 +7,11 @@ import java.awt.Color;
 
 import evenements.EventManager;
 
+/**
+ * Simule deux flocks différents
+ *
+ */
+
 public class PredateursProiesSimulator implements Simulable {
 	
 	protected Flock predateurs;

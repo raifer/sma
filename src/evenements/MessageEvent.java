@@ -1,5 +1,11 @@
 package evenements;
 
+/**
+ * Evenement de test sous forme de message
+ * Ping Pong
+ *
+ */
+
 public class MessageEvent extends Event {
 	private String message;
 	

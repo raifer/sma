@@ -2,6 +2,11 @@
 
 package evenements;
 
+/**
+ * La classe mère pour tous les évènements
+ *
+ */
+
 public abstract class Event implements Comparable<Event> {
 	
 	private long date;
