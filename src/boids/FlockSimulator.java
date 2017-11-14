@@ -18,10 +18,23 @@ public class FlockSimulator implements Simulable {
 	private int height;
 	private int width;
 	
+	/**
+	 * Constructeur par défaut avec 20 boids
+	 * 
+	 * @param gui
+	 * @param manager
+	 */
 	public FlockSimulator(GUISimulator gui, EventManager manager){
 		this(gui, 20, manager);
 	}
 	
+	/**
+	 * Constructeur avec choix du nombre de boids
+	 * 
+	 * @param gui
+	 * @param nb_boids
+	 * @param manager
+	 */
 	public FlockSimulator(GUISimulator gui, int nb_boids, EventManager manager){
 		this.gui = gui;
 		this.height = gui.getPanelHeight() - 200;
