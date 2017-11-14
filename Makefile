@@ -25,64 +25,39 @@
 balls:
 	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/balls/TestBallsSimulator.java
 
-runBalls: balls
+exeBalls: balls
 	java -cp "prof/gui.jar:bin/" balls.TestBallsSimulator
-
 
 jdlv:
 	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/automate/TestJDLVSimulator.java
 
-runJdlv : jdlv
+exeJdlv : jdlv
 	java -cp "prof/gui.jar:bin/" automate.TestJDLVSimulator
-	
+
 immigration:
 	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/automate/TestImmigrationSimulator.java
 
-runImmigration : immigration
+exeImmigration : immigration
 	java -cp "prof/gui.jar:bin/" automate.TestImmigrationSimulator
-	
-schelling : javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/automate/TestSchellingSimulator.java
 
-runSchelling : schelling
+schelling:
+	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/automate/TestSchellingSimulator.java
+
+exeSchelling : schelling
 	java -cp "prof/gui.jar:bin/" automate.TestSchellingSimulator
-	
-flock : javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/boids/FlockSimulator.java
 
-runFlock : flock
-	java -cp "prof/gui.jar:bin/" boids.FlockSimulator
-	
-pp : javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/boids/PredateursProieSimulator.java
+flock:
+	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/boids/TestFlockSimulator.java
 
-runPP : pp
-	java -cp "prof/gui.jar:bin/" boids.PredateursProiesSimulator
+exeFlock : flock
+	java -cp "prof/gui.jar:bin/" boids.TestFlockSimulator
 
-testImmigration:
-	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/automate/TestImmigrationSimulator.java
-testSchelling:
-	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/automate/TestSchellingSimulator.java
-testFlockSimulator:
-	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/boids/TestFlockSimulator.java
+pt:
+	javac -d bin -sourcepath "src/" -cp "prof/gui.jar:bin/" src/boids/TestPPSimulator.java
 
-testPPSimulator:
-	javac -d bin -classpath bin:binProf/gui.jar -sourcepath src src/boids/TestPPSimulator.java
-# Execution:
-# on peut taper directement la ligne de commande :
-#   > java -classpath bin TestGUI
-# ou bien lancer l'execution en passant par ce Makefile:
-#   > make exeIHM
-exeBalls:
-	java -classpath bin/balls/:binProf/gui.jar TestBallsSimulator
+exePt : pt
+	java -cp "prof/gui.jar:bin/" boids.TestPPSimulator
 
-exeJDLV:
-	java -classpath bin:binProf/gui.jar TestJDLVSimulator
-exeImmigration:
-	java -classpath bin:binProf/gui.jar TestImmigrationSimulator
-exeSchelling:
-	java -classpath bin:binProf/gui.jar TestSchellingSimulator
-exeFlockSimulator:
-	java -classpath bin:binProf/gui.jar TestFlockSimulator
-exePPSimulator:
-	java -classpath bin:binProf/gui.jar TestPPSimulator
 clean:
 	rm -rf bin/*.class
 
