@@ -59,5 +59,5 @@ exePt : pt
 	java -cp "prof/gui.jar:bin/" boids.TestPPSimulator
 
 clean:
-	rm -rf bin/*.class
+	rm -rf bin/*
 
