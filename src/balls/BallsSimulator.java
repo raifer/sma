@@ -19,6 +19,8 @@ public class BallsSimulator implements Simulable {
      * Création des balles et placement de celles-ci dans la GUI
      *** 
      * @param gui L'interface où va se dérouller la simulation
+     * @param nbBalls nombre de balles à simuler
+     * @manager le gestionnaire d'évènements
      */
     protected BallsSimulator(GUISimulator gui, int nbBalls, EventManager manager){
         this.setGui(gui);
@@ -29,8 +31,11 @@ public class BallsSimulator implements Simulable {
     }
     
         
-
-    public void drawBalls(){
+    /**
+     * Ajoute les éléments graphiques correspondant
+     * aux balles à l'interfacde de simulation gui
+     */
+    protected void drawBalls(){
         getGui().reset();
         for (int i=0; i< this.getNosBalles().getNbBalls(); i++){
             Point ball = this.getNosBalles().getBall(i);
@@ -41,6 +46,7 @@ public class BallsSimulator implements Simulable {
         }
     }
 
+    
     @Override
     public void next() {
     	this.getManager().next();

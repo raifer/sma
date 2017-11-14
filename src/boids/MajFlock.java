@@ -1,6 +1,5 @@
 package boids;
 
-import balls.BallsSimulator;
 import evenements.Event;
 
 public class MajFlock extends Event {
@@ -15,9 +14,9 @@ public class MajFlock extends Event {
 	@Override
 	public void execute() {
 		
-		this.FlockSim.getFlock().updateBoidsPostion();
+		this.FlockSim.flock.updateBoidsPostion();
 		this.FlockSim.drawFlock();
-		this.FlockSim.getManager().addEvent(new MajFlock(this.FlockSim.getManager().getCurrentDate()+1,this.FlockSim));
+		this.FlockSim.manager.addEvent(new MajFlock(this.FlockSim.manager.getCurrentDate()+1,this.FlockSim));
 		
 	}
 	

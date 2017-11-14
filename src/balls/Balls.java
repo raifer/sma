@@ -12,7 +12,7 @@ public class Balls {
 	private Random randomGenerator;
 
     /**
-     * Constructeur par défaut (créer 4 balles)
+     * Constructeur par défaut (Créer 10 balles)
      */
     public Balls(){
     	this(10);
