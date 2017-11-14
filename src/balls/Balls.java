@@ -4,7 +4,6 @@ import java.util.Random;
 
 
 /**
- * @author raifer
  *
  */
 public class Balls {
